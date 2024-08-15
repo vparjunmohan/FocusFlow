@@ -11,22 +11,23 @@ class SignInViewModel: ObservableObject {
     
     let signInApple = SignInApple()
     
-    func signInWithApple() async throws {
+    func signInWithApple() async throws -> AppUser {
         let appleResult = try await signInApple.startSignInWithAppleFlow()
-        try await AuthManager.shared.signInWithApple(idToken: appleResult.idToken, nonce: appleResult.nonce)
+        return try await AuthManager.shared.signInWithApple(idToken: appleResult.idToken, nonce: appleResult.nonce)
     }
 }
 
 struct SignInView: View {
     
     @StateObject var viewModel = SignInViewModel()
-   
+    @Binding var appUser: AppUser?
     
     var body: some View {
         Button {
             Task {
                 do {
-                    try await viewModel.signInWithApple()
+                    let appUser = try await viewModel.signInWithApple()
+                    self.appUser = appUser
                 } catch {
                     print("Error")
                 }
@@ -38,5 +39,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView()
+    SignInView(appUser: .constant(.init(uid: "123", email: "test@gmail.com")))
 }

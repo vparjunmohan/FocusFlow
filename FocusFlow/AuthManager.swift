@@ -20,15 +20,15 @@ class AuthManager {
     
     let client = SupabaseClient(supabaseURL: URL(string: URLS.baseURL)!, supabaseKey: URLS.authKey)
     
-    func signInWithApple(idToken: String, nonce: String) async throws {
+    func signInWithApple(idToken: String, nonce: String) async throws -> AppUser {
         
         let session = try await client.auth.signInWithIdToken(credentials: .init(provider: .apple, idToken: idToken, nonce: nonce))
-        print(session)
-        print(session.user)
+        return AppUser(uid: session.user.id.uuidString, email: session.user.email)
     }
     
-    func getCurrentSession() async throws {
+    func getCurrentSession() async throws -> AppUser {
         let session = try await client.auth.session
-        print(session)
+        return AppUser(uid: session.user.id.uuidString, email: session.user.email)
     }
+    
 }
