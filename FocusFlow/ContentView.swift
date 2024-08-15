@@ -23,14 +23,20 @@ struct ContentView: View {
         }
         .onAppear {
             Task {
-                if let appUser = AuthManager.shared.getCurrentSession() {
+                if let appUser = try? await AuthManager.shared.getCurrentSession() {
                     self.appUser = appUser
                 }
                 isLoading = false
             }
         }
+        .onChange(of: appUser) { newValue in
+            if newValue == nil {
+                // Reset the view or perform any additional cleanup
+            }
+        }
     }
 }
+
 
 #Preview {
     ContentView()

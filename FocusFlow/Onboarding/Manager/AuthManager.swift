@@ -8,11 +8,14 @@
 import Foundation
 import Supabase
 
-struct AppUser {
-    let uid: String
-    let email: String?
-}
+struct AppUser: Equatable {
+    var uid: String
+    var email: String?
 
+    static func == (lhs: AppUser, rhs: AppUser) -> Bool {
+        return lhs.uid == rhs.uid && lhs.email == rhs.email
+    }
+}
 class AuthManager {
     
     static let shared = AuthManager()
@@ -40,4 +43,26 @@ class AuthManager {
     func signOut() async throws {
         try await client.auth.signOut()
     }
+    
+    func deleteUser(userId: String) async throws {
+            let url = URL(string: "\(URLS.baseURL)/auth/v1/admin/users/\(userId)")!
+            var request = URLRequest(url: url)
+            request.httpMethod = "DELETE"
+            
+            // Add both the service role key and the API key in the request headers
+            request.addValue("Bearer \(URLS.serviceRoleKey)", forHTTPHeaderField: "Authorization")
+            request.addValue(URLS.authKey, forHTTPHeaderField: "apikey")
+            
+            let (data, response) = try await URLSession.shared.data(for: request)
+            
+            if let httpResponse = response as? HTTPURLResponse {
+                guard httpResponse.statusCode == 200 else {
+                    throw NSError()
+                }
+                try await client.auth.signOut()
+                print("User deleted successfully")
+            } else {
+                throw NSError(domain: "Failed to delete user", code: -1, userInfo: [NSLocalizedDescriptionKey: "Invalid response from server"])
+            }
+        }
 }

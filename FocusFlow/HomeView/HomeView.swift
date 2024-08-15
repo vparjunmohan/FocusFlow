@@ -13,7 +13,7 @@ struct HomeView: View {
     @Binding var appUserBinding: AppUser?
 
     var body: some View {
-        VStack {
+        VStack(spacing: 15) {
             Text(appUser.uid)
             Text(appUser.email ?? "No email")
             
@@ -36,6 +36,23 @@ struct HomeView: View {
                     .cornerRadius(8)
             }
             .disabled(isLoading)
+            
+            Button("Delete account") {
+                Task {
+                    do {
+                        try await AuthManager.shared.deleteUser(userId: appUser.uid)
+                        appUserBinding = nil
+                    } catch {
+                        print("Failed to delete the user")
+                    }
+                }
+            }
+        }
+        .onChange(of: appUserBinding) { newValue in
+            if newValue == nil {
+                // Navigate back to ContentView
+                // This will be handled by setting appUserBinding to nil in ContentView
+            }
         }
     }
 }
