@@ -26,9 +26,18 @@ class AuthManager {
         return AppUser(uid: session.user.id.uuidString, email: session.user.email)
     }
     
-    func getCurrentSession() async throws -> AppUser {
-        let session = try await client.auth.session
-        return AppUser(uid: session.user.id.uuidString, email: session.user.email)
+    func getCurrentSession() -> AppUser? {
+        // Get the current session without 'await' since it's not async
+        guard let session = client.auth.currentSession else {
+            return nil
+        }
+        
+        // Return AppUser directly if session is available
+        let user = session.user
+        return AppUser(uid: user.id.uuidString, email: user.email)
     }
     
+    func signOut() async throws {
+        try await client.auth.signOut()
+    }
 }

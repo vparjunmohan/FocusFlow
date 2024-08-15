@@ -16,14 +16,16 @@ struct ContentView: View {
             if isLoading {
                 ProgressView("Loading...")
             } else if let appUser = appUser {
-                HomeView(appUser: appUser)
+                HomeView(appUser: appUser, appUserBinding: $appUser)
             } else {
                 SignInView(appUser: $appUser)
             }
         }
         .onAppear {
             Task {
-                appUser = try await AuthManager.shared.getCurrentSession()
+                if let appUser = AuthManager.shared.getCurrentSession() {
+                    self.appUser = appUser
+                }
                 isLoading = false
             }
         }
