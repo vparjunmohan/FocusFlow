@@ -167,10 +167,9 @@
 		DEC03DF92C6E0D6E004728BA /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				DEC03DED2C6D27A8004728BA /* AuthManager.swift */,
-				DEC03DEB2C6D26C8004728BA /* SignInView.swift */,
-				DEC03DF42C6D2AFB004728BA /* SignInApple.swift */,
-				DEC03DFA2C6E0D8A004728BA /* SignInViewModel.swift */,
+				DEC03E0E2C6E5C37004728BA /* Manager */,
+				DEC03E0D2C6E5C22004728BA /* Views */,
+				DEC03E0C2C6E5C09004728BA /* ViewModel */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -181,6 +180,31 @@
 				DEC03DF72C6D439E004728BA /* HomeView.swift */,
 			);
 			path = HomeView;
+			sourceTree = "<group>";
+		};
+		DEC03E0C2C6E5C09004728BA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03DFA2C6E0D8A004728BA /* SignInViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DEC03E0D2C6E5C22004728BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03DEB2C6D26C8004728BA /* SignInView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		DEC03E0E2C6E5C37004728BA /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03DED2C6D27A8004728BA /* AuthManager.swift */,
+				DEC03DF42C6D2AFB004728BA /* SignInApple.swift */,
+			);
+			path = Manager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
