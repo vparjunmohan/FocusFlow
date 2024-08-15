@@ -10,7 +10,7 @@ import SwiftUI
 struct SignInView: View {
     
     @StateObject var viewModel = SignInViewModel()
-    @Binding var appUser: AppUser?
+    @Binding var appUser: AppUserInfo?
     
     var body: some View {
         Button {
@@ -29,5 +29,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView(appUser: .constant(.init(uid: "123", email: "test@gmail.com")))
+    SignInView(appUser: .constant(.init(id: "123", email: "test@gmail.com")))
 }

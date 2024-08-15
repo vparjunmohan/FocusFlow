@@ -8,14 +8,6 @@
 import Foundation
 import Supabase
 
-struct AppUser: Equatable {
-    var uid: String
-    var email: String?
-
-    static func == (lhs: AppUser, rhs: AppUser) -> Bool {
-        return lhs.uid == rhs.uid && lhs.email == rhs.email
-    }
-}
 class AuthManager {
     
     static let shared = AuthManager()
@@ -23,21 +15,19 @@ class AuthManager {
     
     let client = SupabaseClient(supabaseURL: URL(string: URLS.baseURL)!, supabaseKey: URLS.authKey)
     
-    func signInWithApple(idToken: String, nonce: String) async throws -> AppUser {
+    func signInWithApple(idToken: String, nonce: String) async throws -> AppUserInfo {
         
         let session = try await client.auth.signInWithIdToken(credentials: .init(provider: .apple, idToken: idToken, nonce: nonce))
-        return AppUser(uid: session.user.id.uuidString, email: session.user.email)
+
+        return AppUserInfo(id: session.user.id.uuidString, aud: session.user.aud, role: session.user.role, email: session.user.email, emailConfirmedAt: session.user.emailConfirmedAt?.formatted(), phone: session.user.phone, lastSignInAt: session.user.phone)
     }
     
-    func getCurrentSession() -> AppUser? {
-        // Get the current session without 'await' since it's not async
+    func getCurrentSession() -> AppUserInfo? {
         guard let session = client.auth.currentSession else {
             return nil
         }
         
-        // Return AppUser directly if session is available
-        let user = session.user
-        return AppUser(uid: user.id.uuidString, email: user.email)
+        return AppUserInfo(id: session.user.id.uuidString, aud: session.user.aud, role: session.user.role, email: session.user.email, emailConfirmedAt: session.user.emailConfirmedAt?.formatted(), phone: session.user.phone, lastSignInAt: session.user.phone)
     }
     
     func signOut() async throws {

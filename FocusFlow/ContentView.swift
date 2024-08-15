@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @State private var appUser: AppUser?
+    @State private var appUser: AppUserInfo?
     @State private var isLoading: Bool = true
     
     var body: some View {
@@ -16,23 +16,16 @@ struct ContentView: View {
             if isLoading {
                 ProgressView("Loading...")
             } else if let appUser = appUser {
-                HomeView(appUser: appUser, appUserBinding: $appUser)
+                HomeView(userInfo: appUser, appUserBinding: $appUser)
             } else {
                 SignInView(appUser: $appUser)
             }
         }
         .onAppear {
-            Task {
-                if let appUser = try? await AuthManager.shared.getCurrentSession() {
-                    self.appUser = appUser
-                }
-                isLoading = false
+            if let appUser = AuthManager.shared.getCurrentSession() {
+                self.appUser = appUser
             }
-        }
-        .onChange(of: appUser) { newValue in
-            if newValue == nil {
-                // Reset the view or perform any additional cleanup
-            }
+            isLoading = false
         }
     }
 }
