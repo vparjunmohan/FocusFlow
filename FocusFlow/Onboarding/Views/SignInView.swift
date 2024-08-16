@@ -37,12 +37,11 @@ struct SignInView: View {
         VStack(spacing: 10) {
             Text("Keep on track with Todo")
                 .foregroundStyle(.black)
-                .font(.title)
-                .bold()
+                .font(FontHelper.applyFont(forTextStyle: .title, weight: .bold))
                 .multilineTextAlignment(.center)
             
             Text("Make your task on track easily and seamlessly")
-                .font(.body)
+                .font(FontHelper.applyFont(forTextStyle: .body, weight: .regular))
                 .foregroundColor(.gray)
                 .multilineTextAlignment(.center)
         }
@@ -63,7 +62,7 @@ struct SignInView: View {
                         .frame(width: 20, height: 20)
                     
                     Text("Sign in with Apple")
-                        .font(.title3)
+                        .font(FontHelper.applyFont(forTextStyle: .title3, weight: .medium))
                         .foregroundStyle(.white)
                 }
             }

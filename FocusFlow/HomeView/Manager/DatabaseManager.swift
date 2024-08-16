@@ -16,7 +16,7 @@ class DatabaseManager {
     let client = SupabaseClient(supabaseURL: URL(string: URLS.baseURL)!, supabaseKey: URLS.authKey)
     
     func createTodoItem(item: TodoPayload) async throws {
-        let response = try await client
+        try await client
             .from(TableManager.todos)
             .insert(item)
             .execute()

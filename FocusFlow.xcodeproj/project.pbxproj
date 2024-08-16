@@ -29,6 +29,12 @@
 		DEC03E262C6F5D30004728BA /* Todos.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E252C6F5D30004728BA /* Todos.swift */; };
 		DEC03E282C6F5D6A004728BA /* ToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */; };
 		DEC03E2A2C6F9097004728BA /* CreateTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E292C6F9097004728BA /* CreateTodoView.swift */; };
+		DEC03E382C6FEC44004728BA /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E372C6FEC43004728BA /* Poppins-Bold.ttf */; };
+		DEC03E3E2C6FEC7C004728BA /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3A2C6FEC7C004728BA /* Poppins-Regular.ttf */; };
+		DEC03E3F2C6FEC7C004728BA /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3B2C6FEC7C004728BA /* Poppins-ExtraBold.ttf */; };
+		DEC03E402C6FEC7C004728BA /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */; };
+		DEC03E412C6FEC7C004728BA /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */; };
+		DEC03E442C6FEDBC004728BA /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E432C6FEDBC004728BA /* FontHelper.swift */; };
 		DED345132C6D1A26000988C6 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = DED345122C6D1A26000988C6 /* Auth */; };
 		DED345152C6D1A26000988C6 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = DED345142C6D1A26000988C6 /* Functions */; };
 		DED345172C6D1A26000988C6 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = DED345162C6D1A26000988C6 /* PostgREST */; };
@@ -79,6 +85,13 @@
 		DEC03E252C6F5D30004728BA /* Todos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todos.swift; sourceTree = "<group>"; };
 		DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
 		DEC03E292C6F9097004728BA /* CreateTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoView.swift; sourceTree = "<group>"; };
+		DEC03E372C6FEC43004728BA /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
+		DEC03E3A2C6FEC7C004728BA /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
+		DEC03E3B2C6FEC7C004728BA /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
+		DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
+		DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
+		DEC03E422C6FEC8D004728BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		DEC03E432C6FEDBC004728BA /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,12 +149,13 @@
 		DE93D50D2C6A888600B7E7A2 /* FocusFlow */ = {
 			isa = PBXGroup;
 			children = (
+				DEC03E422C6FEC8D004728BA /* Info.plist */,
 				DEC03DFC2C6E0DD2004728BA /* HomeView */,
 				DEC03DF92C6E0D6E004728BA /* Onboarding */,
+				DEC03E352C6FEC15004728BA /* Helpers */,
 				DEC03DF62C6D3041004728BA /* FocusFlow.entitlements */,
 				DE93D50E2C6A888600B7E7A2 /* FocusFlowApp.swift */,
-				DEC03DF22C6D28A6004728BA /* Constants.swift */,
-				DE93D5122C6A888700B7E7A2 /* Assets.xcassets */,
+				DEC03E322C6FEBF8004728BA /* Resources */,
 				DE93D5142C6A888700B7E7A2 /* Preview Content */,
 			);
 			path = FocusFlow;
@@ -271,6 +285,36 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		DEC03E322C6FEBF8004728BA /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03E362C6FEC27004728BA /* Fonts */,
+				DE93D5122C6A888700B7E7A2 /* Assets.xcassets */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		DEC03E352C6FEC15004728BA /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03DF22C6D28A6004728BA /* Constants.swift */,
+				DEC03E432C6FEDBC004728BA /* FontHelper.swift */,
+			);
+			path = Helpers;
+			sourceTree = "<group>";
+		};
+		DEC03E362C6FEC27004728BA /* Fonts */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03E3B2C6FEC7C004728BA /* Poppins-ExtraBold.ttf */,
+				DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */,
+				DEC03E3A2C6FEC7C004728BA /* Poppins-Regular.ttf */,
+				DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */,
+				DEC03E372C6FEC43004728BA /* Poppins-Bold.ttf */,
+			);
+			path = Fonts;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -387,7 +431,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				DE93D5162C6A888700B7E7A2 /* Preview Assets.xcassets in Resources */,
+				DEC03E412C6FEC7C004728BA /* Poppins-SemiBold.ttf in Resources */,
+				DEC03E3F2C6FEC7C004728BA /* Poppins-ExtraBold.ttf in Resources */,
+				DEC03E382C6FEC44004728BA /* Poppins-Bold.ttf in Resources */,
+				DEC03E402C6FEC7C004728BA /* Poppins-Medium.ttf in Resources */,
 				DE93D5132C6A888700B7E7A2 /* Assets.xcassets in Resources */,
+				DEC03E3E2C6FEC7C004728BA /* Poppins-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -424,6 +473,7 @@
 				DE93D5112C6A888600B7E7A2 /* OnboardingView.swift in Sources */,
 				DEC03E202C6F50BE004728BA /* DatabaseManager.swift in Sources */,
 				DEC03E282C6F5D6A004728BA /* ToDoViewModel.swift in Sources */,
+				DEC03E442C6FEDBC004728BA /* FontHelper.swift in Sources */,
 				DEC03DF52C6D2AFB004728BA /* SignInApple.swift in Sources */,
 				DEC03E172C6E88E6004728BA /* AppUserInfo.swift in Sources */,
 				DE93D50F2C6A888600B7E7A2 /* FocusFlowApp.swift in Sources */,
@@ -595,6 +645,7 @@
 				DEVELOPMENT_TEAM = WD28M49YQQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusFlow/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Focus Flow";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -631,6 +682,7 @@
 				DEVELOPMENT_TEAM = WD28M49YQQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = FocusFlow/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = "Focus Flow";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
