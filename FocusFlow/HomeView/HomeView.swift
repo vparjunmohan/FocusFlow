@@ -8,21 +8,19 @@
 import SwiftUI
 
 struct HomeView: View {
-    @State var userInfo: AppUserInfo
+    @ObservedObject var authViewModel: AuthViewModel
     @State private var isLoading: Bool = false
-    @Binding var appUserBinding: AppUserInfo?
-
+    
     var body: some View {
         VStack(spacing: 15) {
-            Text(userInfo.id)
-            Text(userInfo.email ?? "No email")
+            Text(authViewModel.appUser?.id ?? "")
+            Text(authViewModel.appUser?.email ?? "No email")
             
             Button(action: {
                 Task {
                     do {
                         isLoading = true
-                        try await AuthManager.shared.signOut()
-                        appUserBinding = nil
+                        try await authViewModel.signOut()
                     } catch {
                         print("Failed to log out")
                     }
@@ -40,8 +38,7 @@ struct HomeView: View {
             Button("Delete account") {
                 Task {
                     do {
-                        try await AuthManager.shared.deleteUser(userId: userInfo.id)
-                        appUserBinding = nil
+                        try await authViewModel.deleteAccount()
                     } catch {
                         print("Failed to delete the user")
                     }
@@ -52,5 +49,5 @@ struct HomeView: View {
 }
 
 #Preview {
-    HomeView(userInfo: .init(id: "123", email: "test@gmail.com"), appUserBinding: .constant(.init(id: "123", email: "test@gmail.com")))
+    HomeView(authViewModel: .init())
 }

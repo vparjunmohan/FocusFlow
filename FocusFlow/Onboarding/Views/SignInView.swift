@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct SignInView: View {
-    
-    @StateObject var viewModel = SignInViewModel()
-    @Binding var appUser: AppUserInfo?
+    @StateObject private var signInViewModel = SignInViewModel()
+    @ObservedObject var authViewModel: AuthViewModel
     
     var body: some View {
         Button {
             Task {
                 do {
-                    let appUser = try await viewModel.signInWithApple()
-                    self.appUser = appUser
+                    let appleResult = try await signInViewModel.signInWithApple()
+                    try await authViewModel.signIn(idToken: appleResult.idToken, nonce: appleResult.nonce)
                 } catch {
-                    print("Error")
+                    print("Error signing in: \(error)")
+                    
                 }
             }
         } label: {
@@ -29,5 +29,5 @@ struct SignInView: View {
 }
 
 #Preview {
-    SignInView(appUser: .constant(.init(id: "123", email: "test@gmail.com")))
+    SignInView(authViewModel: .init())
 }
