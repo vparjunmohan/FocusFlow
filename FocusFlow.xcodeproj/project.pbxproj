@@ -23,6 +23,12 @@
 		DEC03DFB2C6E0D8A004728BA /* SignInViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03DFA2C6E0D8A004728BA /* SignInViewModel.swift */; };
 		DEC03E172C6E88E6004728BA /* AppUserInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E162C6E88E5004728BA /* AppUserInfo.swift */; };
 		DEC03E1B2C6F32B2004728BA /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E1A2C6F32B2004728BA /* AuthViewModel.swift */; };
+		DEC03E1D2C6F4BEF004728BA /* ToDoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E1C2C6F4BEF004728BA /* ToDoView.swift */; };
+		DEC03E202C6F50BE004728BA /* DatabaseManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E1F2C6F50BE004728BA /* DatabaseManager.swift */; };
+		DEC03E222C6F51C1004728BA /* TableManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E212C6F51C1004728BA /* TableManager.swift */; };
+		DEC03E262C6F5D30004728BA /* Todos.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E252C6F5D30004728BA /* Todos.swift */; };
+		DEC03E282C6F5D6A004728BA /* ToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */; };
+		DEC03E2A2C6F9097004728BA /* CreateTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E292C6F9097004728BA /* CreateTodoView.swift */; };
 		DED345132C6D1A26000988C6 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = DED345122C6D1A26000988C6 /* Auth */; };
 		DED345152C6D1A26000988C6 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = DED345142C6D1A26000988C6 /* Functions */; };
 		DED345172C6D1A26000988C6 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = DED345162C6D1A26000988C6 /* PostgREST */; };
@@ -67,6 +73,12 @@
 		DEC03DFA2C6E0D8A004728BA /* SignInViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInViewModel.swift; sourceTree = "<group>"; };
 		DEC03E162C6E88E5004728BA /* AppUserInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppUserInfo.swift; sourceTree = "<group>"; };
 		DEC03E1A2C6F32B2004728BA /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		DEC03E1C2C6F4BEF004728BA /* ToDoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoView.swift; sourceTree = "<group>"; };
+		DEC03E1F2C6F50BE004728BA /* DatabaseManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatabaseManager.swift; sourceTree = "<group>"; };
+		DEC03E212C6F51C1004728BA /* TableManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableManager.swift; sourceTree = "<group>"; };
+		DEC03E252C6F5D30004728BA /* Todos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todos.swift; sourceTree = "<group>"; };
+		DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
+		DEC03E292C6F9097004728BA /* CreateTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,7 +193,12 @@
 		DEC03DFC2C6E0DD2004728BA /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				DEC03E242C6F5D1E004728BA /* Model */,
+				DEC03E232C6F5D0F004728BA /* ViewModel */,
+				DEC03E1E2C6F50AD004728BA /* Manager */,
 				DEC03DF72C6D439E004728BA /* HomeView.swift */,
+				DEC03E1C2C6F4BEF004728BA /* ToDoView.swift */,
+				DEC03E292C6F9097004728BA /* CreateTodoView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -217,6 +234,31 @@
 			isa = PBXGroup;
 			children = (
 				DEC03E162C6E88E5004728BA /* AppUserInfo.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DEC03E1E2C6F50AD004728BA /* Manager */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03E1F2C6F50BE004728BA /* DatabaseManager.swift */,
+				DEC03E212C6F51C1004728BA /* TableManager.swift */,
+			);
+			path = Manager;
+			sourceTree = "<group>";
+		};
+		DEC03E232C6F5D0F004728BA /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DEC03E242C6F5D1E004728BA /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03E252C6F5D30004728BA /* Todos.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -362,16 +404,22 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEC03E1D2C6F4BEF004728BA /* ToDoView.swift in Sources */,
 				DEC03E1B2C6F32B2004728BA /* AuthViewModel.swift in Sources */,
 				DEC03DF32C6D28A6004728BA /* Constants.swift in Sources */,
 				DEC03DF82C6D439E004728BA /* HomeView.swift in Sources */,
+				DEC03E2A2C6F9097004728BA /* CreateTodoView.swift in Sources */,
 				DEC03DEC2C6D26C8004728BA /* SignInView.swift in Sources */,
+				DEC03E222C6F51C1004728BA /* TableManager.swift in Sources */,
 				DEC03DEE2C6D27A8004728BA /* AuthManager.swift in Sources */,
 				DEC03DFB2C6E0D8A004728BA /* SignInViewModel.swift in Sources */,
 				DE93D5112C6A888600B7E7A2 /* OnboardingView.swift in Sources */,
+				DEC03E202C6F50BE004728BA /* DatabaseManager.swift in Sources */,
+				DEC03E282C6F5D6A004728BA /* ToDoViewModel.swift in Sources */,
 				DEC03DF52C6D2AFB004728BA /* SignInApple.swift in Sources */,
 				DEC03E172C6E88E6004728BA /* AppUserInfo.swift in Sources */,
 				DE93D50F2C6A888600B7E7A2 /* FocusFlowApp.swift in Sources */,
+				DEC03E262C6F5D30004728BA /* Todos.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -460,7 +508,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -517,7 +565,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -545,7 +593,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -581,7 +629,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
-				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

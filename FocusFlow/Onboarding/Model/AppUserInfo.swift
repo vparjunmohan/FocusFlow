@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct AppUserInfo {
+struct AppUserInfo: Identifiable {
     let id: String
     let email: String?
     let aud, role: String?
