@@ -194,11 +194,9 @@
 			isa = PBXGroup;
 			children = (
 				DEC03E242C6F5D1E004728BA /* Model */,
+				DEC03E312C6FCDE1004728BA /* Views */,
 				DEC03E232C6F5D0F004728BA /* ViewModel */,
 				DEC03E1E2C6F50AD004728BA /* Manager */,
-				DEC03DF72C6D439E004728BA /* HomeView.swift */,
-				DEC03E1C2C6F4BEF004728BA /* ToDoView.swift */,
-				DEC03E292C6F9097004728BA /* CreateTodoView.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -261,6 +259,16 @@
 				DEC03E252C6F5D30004728BA /* Todos.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DEC03E312C6FCDE1004728BA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03DF72C6D439E004728BA /* HomeView.swift */,
+				DEC03E1C2C6F4BEF004728BA /* ToDoView.swift */,
+				DEC03E292C6F9097004728BA /* CreateTodoView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
