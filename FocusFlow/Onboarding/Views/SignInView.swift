@@ -8,25 +8,79 @@
 import SwiftUI
 
 struct SignInView: View {
-    @StateObject private var signInViewModel = SignInViewModel()
+    @StateObject private var viewModel = SignInViewModel()
     @ObservedObject var authViewModel: AuthViewModel
     
     var body: some View {
-        Button {
-            Task {
-                do {
-                    let appleResult = try await signInViewModel.signInWithApple()
-                    try await authViewModel.signIn(idToken: appleResult.idToken, nonce: appleResult.nonce)
-                } catch {
-                    print("Error signing in: \(error)")
+        ZStack {
+            Color.white.ignoresSafeArea()
+            VStack {
+                onboardingImage
+                Spacer()
+                titleView
+                Spacer(minLength: 40)
+                signInWithAppleButton
+                    .padding(.horizontal, 22)
+            }
+            .padding(.vertical, 40)
+        }
+    }
+    
+    private var onboardingImage: some View {
+        Image("onboardingImage")
+            .resizable()
+            .aspectRatio(contentMode: .fit)
+            .frame(maxWidth: .infinity)
+    }
+    
+    private var titleView: some View {
+        VStack(spacing: 10) {
+            Text("Keep on track with Todo")
+                .foregroundStyle(.black)
+                .font(FontHelper.applyFont(forTextStyle: .title, weight: .bold))
+                .multilineTextAlignment(.center)
+            
+            Text("Make your task on track easily and seamlessly")
+                .font(FontHelper.applyFont(forTextStyle: .body, weight: .regular))
+                .foregroundColor(.gray)
+                .multilineTextAlignment(.center)
+        }
+        .padding(.horizontal, 22)
+    }
+    
+    private var signInWithAppleButton: some View {
+        Button(action: signInWithApple) {
+            ZStack {
+                RoundedRectangle(cornerRadius: 28)
+                    .foregroundColor(.black)
+                    .frame(height: 56)
+                
+                HStack(spacing: 10) {
+                    Image("appleLogo")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 20, height: 20)
                     
+                    Text("Sign in with Apple")
+                        .font(FontHelper.applyFont(forTextStyle: .title3, weight: .medium))
+                        .foregroundStyle(.white)
                 }
             }
-        } label: {
-            Text("Sign in with Apple")
+        }
+    }
+    
+    private func signInWithApple() {
+        Task {
+            do {
+                let appleResult = try await viewModel.signInWithApple()
+                try await authViewModel.signIn(idToken: appleResult.idToken, nonce: appleResult.nonce)
+            } catch {
+                print("Error signing in: \(error)")
+            }
         }
     }
 }
+
 
 #Preview {
     SignInView(authViewModel: .init())
