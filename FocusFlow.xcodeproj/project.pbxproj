@@ -35,6 +35,9 @@
 		DEC03E402C6FEC7C004728BA /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */; };
 		DEC03E412C6FEC7C004728BA /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */; };
 		DEC03E442C6FEDBC004728BA /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E432C6FEDBC004728BA /* FontHelper.swift */; };
+		DEC03E462C707223004728BA /* DayBriefCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E452C707223004728BA /* DayBriefCardView.swift */; };
+		DEC03E482C7077E3004728BA /* BriefCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E472C7077E3004728BA /* BriefCardViewModel.swift */; };
+		DEC03E4A2C709E07004728BA /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E492C709E07004728BA /* Poppins-ExtraLight.ttf */; };
 		DED345132C6D1A26000988C6 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = DED345122C6D1A26000988C6 /* Auth */; };
 		DED345152C6D1A26000988C6 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = DED345142C6D1A26000988C6 /* Functions */; };
 		DED345172C6D1A26000988C6 /* PostgREST in Frameworks */ = {isa = PBXBuildFile; productRef = DED345162C6D1A26000988C6 /* PostgREST */; };
@@ -92,6 +95,9 @@
 		DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		DEC03E422C6FEC8D004728BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DEC03E432C6FEDBC004728BA /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
+		DEC03E452C707223004728BA /* DayBriefCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBriefCardView.swift; sourceTree = "<group>"; };
+		DEC03E472C7077E3004728BA /* BriefCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefCardViewModel.swift; sourceTree = "<group>"; };
+		DEC03E492C709E07004728BA /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -263,6 +269,7 @@
 			isa = PBXGroup;
 			children = (
 				DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */,
+				DEC03E472C7077E3004728BA /* BriefCardViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -281,6 +288,7 @@
 				DEC03DF72C6D439E004728BA /* HomeView.swift */,
 				DEC03E1C2C6F4BEF004728BA /* ToDoView.swift */,
 				DEC03E292C6F9097004728BA /* CreateTodoView.swift */,
+				DEC03E452C707223004728BA /* DayBriefCardView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -306,6 +314,7 @@
 		DEC03E362C6FEC27004728BA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
+				DEC03E492C709E07004728BA /* Poppins-ExtraLight.ttf */,
 				DEC03E3B2C6FEC7C004728BA /* Poppins-ExtraBold.ttf */,
 				DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */,
 				DEC03E3A2C6FEC7C004728BA /* Poppins-Regular.ttf */,
@@ -434,6 +443,7 @@
 				DEC03E412C6FEC7C004728BA /* Poppins-SemiBold.ttf in Resources */,
 				DEC03E3F2C6FEC7C004728BA /* Poppins-ExtraBold.ttf in Resources */,
 				DEC03E382C6FEC44004728BA /* Poppins-Bold.ttf in Resources */,
+				DEC03E4A2C709E07004728BA /* Poppins-ExtraLight.ttf in Resources */,
 				DEC03E402C6FEC7C004728BA /* Poppins-Medium.ttf in Resources */,
 				DE93D5132C6A888700B7E7A2 /* Assets.xcassets in Resources */,
 				DEC03E3E2C6FEC7C004728BA /* Poppins-Regular.ttf in Resources */,
@@ -468,8 +478,10 @@
 				DEC03E2A2C6F9097004728BA /* CreateTodoView.swift in Sources */,
 				DEC03DEC2C6D26C8004728BA /* SignInView.swift in Sources */,
 				DEC03E222C6F51C1004728BA /* TableManager.swift in Sources */,
+				DEC03E462C707223004728BA /* DayBriefCardView.swift in Sources */,
 				DEC03DEE2C6D27A8004728BA /* AuthManager.swift in Sources */,
 				DEC03DFB2C6E0D8A004728BA /* SignInViewModel.swift in Sources */,
+				DEC03E482C7077E3004728BA /* BriefCardViewModel.swift in Sources */,
 				DE93D5112C6A888600B7E7A2 /* OnboardingView.swift in Sources */,
 				DEC03E202C6F50BE004728BA /* DatabaseManager.swift in Sources */,
 				DEC03E282C6F5D6A004728BA /* ToDoViewModel.swift in Sources */,
