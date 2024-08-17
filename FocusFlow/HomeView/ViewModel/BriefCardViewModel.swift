@@ -51,7 +51,13 @@ class DayBriefCardViewModel: ObservableObject {
         (self.currentWeekday, self.currentDay) = Self.getCurrentWeekdayAndDay()
     }
     
-    private static func getCurrentWeekdayAndDay() -> (weekday: String, day: String) {
+    /// Gets the current weekday and day of the month.
+    ///
+    /// Returns:
+    /// - A tuple containing:
+    ///   - `weekday`: The abbreviated name of the current weekday (e.g., "Mon").
+    ///   - `day`: The day of the month as a string (e.g., "16").
+    static func getCurrentWeekdayAndDay() -> (weekday: String, day: String) {
         let currentDate = Date()
         let dateFormatter = DateFormatter()
         
@@ -64,6 +70,10 @@ class DayBriefCardViewModel: ObservableObject {
         return (weekday: weekdayName, day: dayOfMonth)
     }
     
+    /// Updates the current weekday and day of the month.
+    ///
+    /// This method re-calculates the current values and updates the `currentWeekday`
+    /// and `currentDay` properties by calling `getCurrentWeekdayAndDay()`.
     func updateCurrentDate() {
         (self.currentWeekday, self.currentDay) = Self.getCurrentWeekdayAndDay()
     }
