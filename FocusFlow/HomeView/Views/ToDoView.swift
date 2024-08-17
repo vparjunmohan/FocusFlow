@@ -15,7 +15,7 @@ struct ToDoView: View {
         ZStack {
             LazyVStack {
                 ForEach(viewModel.todoList, id: \.id) { todo in
-                    Text(todo.todo ?? "No todo")
+                    Text(todo.todo)
                 }
             }
         }
