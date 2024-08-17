@@ -35,6 +35,15 @@ struct AppSpacers {
     
     /// Large space of 16 points, used for more noticeable gaps or padding
     static let large: CGFloat = 16
+    
+    /// xLarge space of 20 points, used for more noticeable gaps or padding
+    static let xlarge: CGFloat = 20
+    
+    /// xxLarge space of 24 points, used for more noticeable gaps or padding
+    static let xxlarge: CGFloat = 24
+    
+    /// xxxLarge space of 28 points, used for more noticeable gaps or padding
+    static let xxxlarge: CGFloat = 28
 }
 
 /// A collection of corner radius values used for rounded corners throughout the app.
@@ -55,9 +64,13 @@ struct AppCornerCurves {
 /// across various UI elements in the app. It helps in ensuring a unified theme and
 /// color palette.
 ///
-/// - `themeColor`: The primary theme color for the app, defined in the asset catalog as "AppTheme".
+/// - `appBgColor`: The primary background color for the app, defined in the asset catalog as "AppBgColor".
 /// - `cardColor`: The color used for card backgrounds, defined in the asset catalog as "AppCardColor".
+/// - `themeColor`: The color used as primary tint color, defined in the asset catalog as "AppThemeColor".
+/// - `dangerColor`: The color used as error, negative or danger, defined in the asset catalog as "AppDangerColor".
 struct AppColors {
-    static let themeColor: Color = Color("AppTheme")
+    static let appBgColor: Color = Color("AppBgColor")
     static let cardColor: Color = Color("AppCardColor")
+    static let themeColor: Color = Color("AppThemeColor")
+    static let dangerColor: Color = Color("AppDangerColor")
 }
