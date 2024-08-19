@@ -8,11 +8,15 @@
 import Foundation
 import SwiftUI
 
+//MARK: - Constants
+
 struct URLS {
     static let baseURL = "https://fqtpyipffielhhpurwmw.supabase.co"
     static let authKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxdHB5aXBmZmllbGhocHVyd213Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjM2NTYxODQsImV4cCI6MjAzOTIzMjE4NH0.aF48FZM2OM_zFcRVfCkShHELbg5i2dNRAgc7ZJMH4ws"
     static let serviceRoleKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxdHB5aXBmZmllbGhocHVyd213Iiwicm9sZSI6InNlcnZpY2Vfcm9sZSIsImlhdCI6MTcyMzY1NjE4NCwiZXhwIjoyMDM5MjMyMTg0fQ.PD-gQwvxOEYQA5x0SGs-JFjn9y3pgMkyvKFEDlaNBMw"
 }
+
+//MARK: - AppSpacers
 
 /// A collection of standard spacer values used for consistent spacing throughout the app.
 ///
@@ -35,19 +39,81 @@ struct AppSpacers {
     
     /// Large space of 16 points, used for more noticeable gaps or padding
     static let large: CGFloat = 16
+    
+    /// xLarge space of 20 points, used for more noticeable gaps or padding
+    static let xlarge: CGFloat = 20
+    
+    /// xxLarge space of 24 points, used for more noticeable gaps or padding
+    static let xxlarge: CGFloat = 24
+    
+    /// xxxLarge space of 28 points, used for more noticeable gaps or padding
+    static let xxxlarge: CGFloat = 28
 }
 
-/// A collection of corner radius values used for rounded corners throughout the app.
+//MARK: - AppIconSize
+
+/// A struct that defines standard sizes for app icons.
 ///
-/// This struct defines standard corner radius sizes to maintain consistent rounded corners
-/// across different UI elements in the app.
-///
-/// - `large`: Large corner radius, typically used for buttons, cards, or other elements
-///   that need a more pronounced rounded appearance.
-struct AppCornerCurves {
-    /// Large corner radius of 30 points, used for creating a pronounced rounded appearance
-    static let large: CGFloat = 30
+/// `AppIconSize` provides a set of predefined icon sizes used throughout the app. These sizes
+/// are represented as static constants of type `CGFloat`, making it easy to maintain consistent
+/// icon dimensions across different parts of the UI.
+struct AppIconSize {
+    /// xSmall icon size of 16 points.
+    static let xsmall: CGFloat = 10
+    
+    /// Small icon size of 16 points.
+    static let small: CGFloat = 16
+    
+    /// Medium icon size of 20 points.
+    static let medium: CGFloat = 20
+    
+    /// Large icon size of 25 points.
+    static let large: CGFloat = 25
+    
+    /// xLarge icon size of 30 points.
+    static let xlarge: CGFloat = 35
+    
+    /// xxLarge icon size of 50 points.
+    static let xxlarge: CGFloat = 50
 }
+
+// MARK: - AppCornerCurves
+
+/// A struct that defines standard corner radius values for rounded corners throughout the app.
+///
+/// `AppCornerCurves` provides a set of predefined corner radius sizes that can be used across
+/// various UI elements to ensure consistency in the app's design. These values help maintain
+/// a cohesive visual style by standardizing the rounding of corners on components like buttons,
+/// cards, and other UI elements.
+struct AppCornerCurves {
+    
+    /// Small corner radius of 20 points, typically used for subtle rounding on smaller components.
+    static let small: CGFloat = 20
+    
+    /// Large corner radius of 28 points, used for creating a more pronounced rounded appearance
+    /// on elements like buttons, cards, or containers.
+    static let large: CGFloat = 28
+}
+
+//MARK: - AppComponentSize
+
+/// A struct that defines standard sizes for various UI components in the app.
+///
+/// `AppComponentSize` provides a set of predefined dimensions used for different components,
+/// ensuring consistency throughout the app's user interface. This includes standard sizes
+/// such as button heights.
+struct AppComponentSize {
+    /// The standard height for buttons, set to 56 points.
+    static let buttonHeight: CGFloat = 56
+    
+    /// The standard height for day brief card, set to 200 points.
+    static let dayBriefCardHeight: CGFloat = 200
+    
+    /// The standard height for task view, set to 70 points.
+    static let taskViewHeight: CGFloat = 70
+}
+
+//MARK: - AppColors
 
 /// A collection of color values used for consistent theming throughout the app.
 ///
@@ -55,9 +121,13 @@ struct AppCornerCurves {
 /// across various UI elements in the app. It helps in ensuring a unified theme and
 /// color palette.
 ///
-/// - `themeColor`: The primary theme color for the app, defined in the asset catalog as "AppTheme".
+/// - `appBgColor`: The primary background color for the app, defined in the asset catalog as "AppBgColor".
 /// - `cardColor`: The color used for card backgrounds, defined in the asset catalog as "AppCardColor".
+/// - `themeColor`: The color used as primary tint color, defined in the asset catalog as "AppThemeColor".
+/// - `dangerColor`: The color used as error, negative or danger, defined in the asset catalog as "AppDangerColor".
 struct AppColors {
-    static let themeColor: Color = Color("AppTheme")
+    static let appBgColor: Color = Color("AppBgColor")
     static let cardColor: Color = Color("AppCardColor")
+    static let themeColor: Color = Color("AppThemeColor")
+    static let dangerColor: Color = Color("AppDangerColor")
 }
