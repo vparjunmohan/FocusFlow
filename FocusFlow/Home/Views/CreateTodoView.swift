@@ -23,12 +23,25 @@ struct CreateTodoView: View {
     var titlePlaceholder: String = "e.g., Go to gym tomorrow"
     var descriptionPlaceholder: String = "Description"
     
+    var priorities: [String] = ["Priority 1", "Priority 2", "Priority 3", "Priority 4"]
+    @State var selection = "Priority 1"
+    @State private var showPicker = false
+    
     var body: some View {
         ZStack {
             AppColors.appBgColor.ignoresSafeArea()
-            VStack {
+            VStack(alignment: .leading) {
                 todoTitleField
+                
                 todoDescriptionEditor
+                
+                VStack(alignment: .leading, spacing: AppSpacers.small) {
+                    if showPicker {
+                        PriorityListView()
+                    }
+                    priorityButton
+                }
+                
                 submitButton
             }
         }
@@ -68,6 +81,7 @@ struct CreateTodoView: View {
                 .font(FontHelper.applyFont(forTextStyle: .body, weight: .regular))
                 .colorMultiply(AppColors.appBgColor)
                 .padding(.horizontal, AppSpacers.large)
+            //                .colorMultiply(.yellow)
             
             if todoDescription.isEmpty {
                 Text(descriptionPlaceholder)
@@ -79,6 +93,26 @@ struct CreateTodoView: View {
             }
         }
     }
+    
+    var priorityButton: some View {
+        Button {
+            showPicker.toggle()
+        } label: {
+            HStack {
+                Image(systemName: "flag")
+                Text(selection) // Display selected priority
+                    .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
+            }
+            .foregroundStyle(AppColors.labelColor)
+        }
+        .padding(.all, AppSpacers.small)
+        .background(
+            RoundedRectangle(cornerRadius: AppCornerCurves.xsmall)
+                .stroke(AppColors.stokeColor, lineWidth: 1)
+        )
+        .padding(.leading, AppSpacers.large)
+    }
+    
     
     /// A button for submitting the new to-do item.
     ///
@@ -123,6 +157,7 @@ struct CreateTodoView: View {
         Task {
             do {
                 try await viewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "")
+                try await viewModel.fetchItems(uid: appUserViewModel.appUser?.id ?? "")
                 createTodoPresented.toggle()
             } catch {
                 print("Failed to create todo")

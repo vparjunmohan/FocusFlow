@@ -23,11 +23,15 @@ struct URLS {
 /// This struct defines common spacer sizes to ensure uniform spacing in the user interface.
 /// It helps maintain a consistent layout and design language across different views.
 ///
+/// - `unity`: Very small spacer, typically used for very tight spacing.
 /// - `xsmall`: Extra small spacer, typically used for very tight spacing.
 /// - `small`: Small spacer, used for minor gaps or padding.
 /// - `medium`: Medium spacer, for moderate gaps or padding.
 /// - `large`: Large spacer, used for more noticeable gaps or padding.
 struct AppSpacers {
+    /// A  small space of 1 points, used for stroke or very thin line
+    static let unity: CGFloat = 1
+    
     /// Extra small space of 4 points, used for very tight spacing
     static let xsmall: CGFloat = 4
     
@@ -86,6 +90,8 @@ struct AppIconSize {
 /// a cohesive visual style by standardizing the rounding of corners on components like buttons,
 /// cards, and other UI elements.
 struct AppCornerCurves {
+    /// xSmall corner radius of 4 points, typically used for smaller rounding on the components.
+    static let xsmall: CGFloat = 8
     
     /// Small corner radius of 20 points, typically used for subtle rounding on smaller components.
     static let small: CGFloat = 20
@@ -117,17 +123,29 @@ struct AppComponentSize {
 
 /// A collection of color values used for consistent theming throughout the app.
 ///
-/// This struct defines color values that are used to maintain a cohesive color scheme
-/// across various UI elements in the app. It helps in ensuring a unified theme and
-/// color palette.
+/// This struct defines and centralizes the color values used across various UI elements
+/// to maintain a cohesive and unified visual theme. The colors are defined in the app's
+/// asset catalog and are used for backgrounds, text, buttons, and other components.
 ///
-/// - `appBgColor`: The primary background color for the app, defined in the asset catalog as "AppBgColor".
-/// - `cardColor`: The color used for card backgrounds, defined in the asset catalog as "AppCardColor".
-/// - `themeColor`: The color used as primary tint color, defined in the asset catalog as "AppThemeColor".
-/// - `dangerColor`: The color used as error, negative or danger, defined in the asset catalog as "AppDangerColor".
+/// - `appBgColor`: The primary background color for the app, providing a consistent base throughout the UI.
+/// - `cardColor`: The background color used for cards and other container views.
+/// - `themeColor`: The primary tint color used across the app, giving prominence to key elements.
+/// - `dangerColor`: The color used to indicate errors, warnings, or critical actions, providing clear visual feedback.
+/// - `stokeColor`: The color used for strokes and borders around components, enhancing separation and emphasis.
+/// - `labelColor`: The default color used for labels that include icons or images, ensuring text visibility and consistency.
+/// - `priority1`: The color associated with "Priority 1" items, providing a visual cue for high-priority tasks.
+/// - `priority2`: The color associated with "Priority 2" items, helping to differentiate between priority levels.
+/// - `priority3`: The color associated with "Priority 3" items, ensuring a clear distinction among task priorities.
+/// - `priority4`: The color associated with "Priority 4" items, maintaining a uniform approach to lower-priority tasks.
 struct AppColors {
     static let appBgColor: Color = Color("AppBgColor")
     static let cardColor: Color = Color("AppCardColor")
     static let themeColor: Color = Color("AppThemeColor")
     static let dangerColor: Color = Color("AppDangerColor")
+    static let stokeColor: Color = Color("AppStrokeColor")
+    static let labelColor: Color = Color("AppLabelColor")
+    static let priority1: Color = Color("Priority1Color")
+    static let priority2: Color = Color("Priority2Color")
+    static let priority3: Color = Color("Priority3Color")
+    static let priority4: Color = Color("Priority4Color")
 }
