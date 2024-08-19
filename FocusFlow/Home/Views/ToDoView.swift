@@ -34,7 +34,7 @@ struct ToDoView: View {
     var todoListView: some View {
         LazyVStack(spacing: AppSpacers.medium) {
             ForEach(viewModel.todoList, id: \.id) { todo in
-                TaskView(task: todo)
+                TaskView(todos: todo)
             }
         }
         .padding(.all, AppSpacers.large)

@@ -40,8 +40,8 @@ class ToDoViewModel: ObservableObject {
     ///   - text: The text content of the to-do item.
     ///   - userUID: The unique identifier of the user creating the to-do item.
     /// - Throws: An error if the to-do item could not be created or saved to the database.
-    func createItem(text: String, userUID: String) async throws {
-        let todo = TodoPayload(todo: text, userUID: userUID)
+    func createItem(text: String, description: String, userUID: String) async throws {
+        let todo = TodoPayload(todo: text, userUID: userUID, taskDescription: description)
         try await DatabaseManager.shared.createTodoItem(item: todo)
     }
     

@@ -14,7 +14,7 @@ import SwiftUI
 /// and an icon indicating the task's priority. The layout is designed with consistent
 /// spacing, padding, and styling to ensure a cohesive appearance in the app.
 struct TaskView: View {
-    var task: Todos
+    var todos: Todos
     
     var body: some View {
         HStack(spacing: AppSpacers.large) {
@@ -57,7 +57,7 @@ struct TaskView: View {
     /// The text elements are aligned to the leading edge, with a small vertical spacing between them.
     var taskDetails: some View {
         VStack(alignment: .leading, spacing: AppSpacers.xsmall) {
-            Text(task.todo)
+            Text(todos.task)
                 .font(FontHelper.applyFont(forTextStyle: .headline, weight: .regular))
             Text("18/08")
                 .font(FontHelper.applyFont(forTextStyle: .caption, weight: .regular))
@@ -76,5 +76,5 @@ struct TaskView: View {
 
 
 #Preview {
-    TaskView(task: .init(id: 1, createdAt: "12/8", todo: "Task 1", userUID: "userid"))
+    TaskView(todos: .init(id: 1, createdAt: "12/8", todo: "Task 1", userUID: "userid", taskDescription: ""))
 }

@@ -20,19 +20,22 @@ import Foundation
 struct Todos: Codable {
     let id: Int
     let createdAt: String
-    let todo: String
+    let task: String
+    let taskDescription: String
     let userUID: String
     
-    init(id: Int, createdAt: String, todo: String, userUID: String) {
+    init(id: Int, createdAt: String, todo: String, userUID: String, taskDescription: String) {
         self.id = id
         self.createdAt = createdAt
-        self.todo = todo
+        self.task = todo
+        self.taskDescription = taskDescription
         self.userUID = userUID
     }
     
     enum CodingKeys: String, CodingKey {
-        case id, todo
+        case id, task
         case createdAt = "created_at"
+        case taskDescription = "task_description"
         case userUID = "user_uid"
     }
 }
@@ -47,16 +50,19 @@ struct Todos: Codable {
 /// The `CodingKeys` enum maps the JSON keys to the struct properties, ensuring proper
 /// encoding and decoding when interacting with the database or an API.
 struct TodoPayload: Codable {
-    let todo: String
+    let task: String
+    let taskDescription: String
     let userUID: String
     
-    init(todo: String, userUID: String) {
-        self.todo = todo
+    init(todo: String, userUID: String, taskDescription: String) {
+        self.task = todo
+        self.taskDescription = taskDescription
         self.userUID = userUID
     }
     
     enum CodingKeys: String, CodingKey {
-        case todo
+        case task
+        case taskDescription = "task_description"
         case userUID = "user_uid"
     }
 }

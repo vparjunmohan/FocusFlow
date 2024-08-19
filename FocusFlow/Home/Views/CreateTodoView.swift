@@ -122,7 +122,7 @@ struct CreateTodoView: View {
     func submitTodo() {
         Task {
             do {
-                try await viewModel.createItem(text: todoTitle, userUID: appUserViewModel.appUser?.id ?? "")
+                try await viewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "")
                 createTodoPresented.toggle()
             } catch {
                 print("Failed to create todo")
