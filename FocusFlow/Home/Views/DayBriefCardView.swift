@@ -27,11 +27,12 @@ struct DayBriefCardView: View {
             messageColumn
         }
         .padding([.horizontal, .vertical], AppSpacers.medium)
-        .frame(maxWidth: .infinity, maxHeight: 200)
+        .frame(maxWidth: .infinity, maxHeight: AppComponentSize.dayBriefCardHeight)
         .padding(.horizontal, AppSpacers.medium)
         .background(cardBackground)
     }
     
+    // MARK: - Subviews
     /// A vertical stack (VStack) that displays the date information for the card.
     ///
     /// This view includes:

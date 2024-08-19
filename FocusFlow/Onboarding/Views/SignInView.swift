@@ -51,15 +51,15 @@ struct SignInView: View {
     private var signInWithAppleButton: some View {
         Button(action: signInWithApple) {
             ZStack {
-                RoundedRectangle(cornerRadius: 28)
+                RoundedRectangle(cornerRadius: AppCornerCurves.large)
                     .foregroundColor(.black)
-                    .frame(height: 56)
+                    .frame(height: AppComponentSize.buttonHeight)
                 
                 HStack(spacing: 10) {
                     Image("appleLogo")
                         .resizable()
                         .aspectRatio(contentMode: .fit)
-                        .frame(width: 20, height: 20)
+                        .frame(width: AppIconSize.medium, height: AppIconSize.medium)
                     
                     Text("Sign in with Apple")
                         .font(FontHelper.applyFont(forTextStyle: .title3, weight: .medium))

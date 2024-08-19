@@ -32,9 +32,12 @@ struct CreateTodoView: View {
                 submitButton
             }
         }
+        .onAppear {
+            isTodoTitleFocused = true
+        }
     }
     
-    // MARK: - COMPONENTS
+    // MARK: - Subviews
     /// A text field for entering the title of a new to-do item.
     ///
     /// This text field allows the user to input the title of the to-do item. It is styled
@@ -43,6 +46,7 @@ struct CreateTodoView: View {
     /// state variable, ensuring that changes are reflected in real-time.
     var todoTitleField: some View {
         TextField(titlePlaceholder, text: $todoTitle)
+            .focused($isTodoTitleFocused)
             .font(FontHelper.applyFont(forTextStyle: .title3, weight: .semiBold))
             .padding(.horizontal, AppSpacers.large)
             .padding(.top, AppSpacers.large)
@@ -91,11 +95,11 @@ struct CreateTodoView: View {
             Button(action: submitTodo, label: {
                 ZStack {
                     Circle()
-                        .frame(width: 35, height: 35)
+                        .frame(width: AppIconSize.xlarge, height: AppIconSize.xlarge)
                         .foregroundStyle(AppColors.themeColor)
                     Image(systemName: "arrow.up")
                         .resizable()
-                        .frame(width: 10, height: 10)
+                        .frame(width: AppIconSize.xsmall, height: AppIconSize.xsmall)
                         .foregroundStyle(.white)
                 }
             })
@@ -104,7 +108,7 @@ struct CreateTodoView: View {
         }
     }
     
-    // MARK: - ACTIONS
+    // MARK: - Actions
     /// Submits the new to-do item.
     ///
     /// This function is triggered when the user taps the submit button. It performs the following steps:

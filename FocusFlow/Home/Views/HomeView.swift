@@ -30,6 +30,7 @@ struct HomeView: View {
         }
     }
     
+    // MARK: - Subviews
     /// The sheet view for creating a new to-do item.
     ///
     /// This view presents the ``CreateTodoView`` in a sheet, allowing the user to add a new to-do item.
@@ -70,8 +71,8 @@ struct HomeView: View {
             LazyVStack(spacing: 0) {
                 DayBriefCardView()
                     .padding(.top, AppSpacers.large)
-                    .frame(height: 230)
-                // ToDoView(viewModel: todoVM, appUserInfo: authVM)
+                    .frame(height: AppComponentSize.dayBriefCardHeight)
+                 ToDoView(viewModel: todoVM, appUserInfo: authVM)
             }
         }
     }
@@ -89,7 +90,7 @@ struct HomeView: View {
         } label: {
             Image(systemName: "plus.circle.fill")
                 .resizable()
-                .frame(width: 50, height: 50)
+                .frame(width: AppIconSize.xxlarge, height: AppIconSize.xxlarge)
                 .foregroundStyle(AppColors.themeColor)
         }
         .padding(.all, AppSpacers.xxxlarge)
