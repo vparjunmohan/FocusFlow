@@ -92,6 +92,11 @@ struct HomeView: View {
                 .resizable()
                 .frame(width: AppIconSize.xxlarge, height: AppIconSize.xxlarge)
                 .foregroundStyle(AppColors.themeColor)
+                .background(
+                    Circle()
+                        .fill(AppColors.appBgColor)
+                        .frame(width: AppIconSize.xxlarge, height: AppIconSize.xxlarge)
+                )
         }
         .padding(.all, AppSpacers.xxxlarge)
     }
