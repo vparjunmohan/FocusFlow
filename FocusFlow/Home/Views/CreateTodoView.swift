@@ -23,8 +23,7 @@ struct CreateTodoView: View {
     var titlePlaceholder: String = "e.g., Go to gym tomorrow"
     var descriptionPlaceholder: String = "Description"
     
-    var priorities: [String] = ["Priority 1", "Priority 2", "Priority 3", "Priority 4"]
-    @State var selection = "Priority 1"
+    @State var selection = "Priority"
     @State private var showPicker = false
     
     var body: some View {
@@ -100,7 +99,7 @@ struct CreateTodoView: View {
         } label: {
             HStack {
                 Image(systemName: "flag")
-                Text(selection) // Display selected priority
+                Text(selection)
                     .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             }
             .foregroundStyle(AppColors.labelColor)
