@@ -23,22 +23,16 @@ struct PriorityListView: View {
     
     /// The main content of the `PriorityListView`, defining the layout and appearance of the priority list.
     ///
-    /// The `body` uses a vertical stack (`VStack`) to organize a list of priority items. Each item is represented by a horizontal stack (`HStack`) containing an icon and a label. The list is generated using a `ForEach` loop that iterates over the `priorities` array. The ``priorityRow(for:isLast:)`` function is used to create each row, and it determines whether a separator should be included.
+    /// The `body` uses a vertical stack (`VStack`) to organize a list of priority items. Each item is displayed using a horizontal stack (`HStack`) which includes an icon and a label. The list is created by iterating over the `priorities` array with a `ForEach` loop, and each row is constructed using the `priorityRow(for:isLast:)` function. This function determines whether a separator should be included based on the position of the item in the list.
     ///
-    /// - The `VStack` is aligned to the leading edge and includes padding around the vertical axis.
-    /// - The background color of the stack is set to `AppColors.cardColor` and is enclosed in a rounded rectangle with a shadow effect.
-    /// - The view is constrained in width to a portion of the screen width and includes padding around the entire view for spacing from its container.
-    /// - When a priority is tapped, the `selectedPriority` is updated, and the picker view is dismissed by toggling `showPicker`.
+    /// - The `VStack` is aligned to the leading edge and contains padding for spacing around the vertical axis.
+    /// - The background color is set to `AppColors.cardColor`, and the view is enclosed in a rounded rectangle with a shadow effect for visual enhancement.
+    /// - The view's width is constrained to a portion of the screen width, and it includes padding around the entire view to ensure proper spacing from its container.
+    /// - Tapping on a priority item updates the `selectedPriority` and toggles the `showPicker` to dismiss the picker view, using an animation defined in the `priorityRow` function.
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(Array(priorities.enumerated()), id: \.element) { index, priority in
                 priorityRow(for: priority, isLast: index == priorities.count - 1)
-                    .onTapGesture {
-                        withAnimation(.easeInOut(duration: 0.3)) {
-                            selectedPriority = priority.name
-                            showPicker.toggle()
-                        }
-                    }
             }
         }
         .frame(maxWidth: UIScreen.main.bounds.width / 1.25)
@@ -52,7 +46,10 @@ struct PriorityListView: View {
     ///
     /// This function generates a horizontal stack (`HStack`) that includes the priority icon
     /// and the priority information. It also determines if a separator should be shown based on
-    /// whether the priority item is the last in the list.
+    /// whether the priority item is the last in the list. The entire `HStack` is made tappable
+    /// by applying the `.contentShape(Rectangle())` modifier, ensuring that the tap gesture is
+    /// recognized across the entire row. When tapped, the priority item is selected and the
+    /// picker view is dismissed with an animation.
     ///
     /// - Parameters:
     ///   - priority: The `PriorityModel` instance containing the details of the priority item.
@@ -64,6 +61,13 @@ struct PriorityListView: View {
         HStack {
             priorityIcon(for: priority)
             priorityInfo(for: priority, showSeparator: !isLast)
+        }
+        .contentShape(Rectangle())
+        .onTapGesture {
+            withAnimation(.easeInOut(duration: 0.3)) {
+                selectedPriority = priority.name
+                showPicker.toggle()
+            }
         }
     }
     
@@ -98,7 +102,7 @@ struct PriorityListView: View {
             Text(priority.name)
                 .font(FontHelper.applyFont(forTextStyle: .subheadline))
                 .padding(AppSpacers.small)
-            
+                .frame(maxWidth: .infinity, alignment: .leading)
             if showSeparator {
                 separator
             }

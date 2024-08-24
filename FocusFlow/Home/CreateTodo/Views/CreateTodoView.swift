@@ -18,13 +18,12 @@ struct CreateTodoView: View {
     @Binding var createTodoPresented: Bool
     @State var todoTitle: String = ""
     @State var todoDescription: String = ""
+    @State var selectedPriority = "Priority"
+    @State private var showPicker = false
     @FocusState var isTodoTitleFocused: Bool
     
     var titlePlaceholder: String = "e.g., Go to gym tomorrow"
     var descriptionPlaceholder: String = "Description"
-    
-    @State var selectedPriority = "Priority"
-    @State private var showPicker = false
     
     var body: some View {
         ZStack {
@@ -133,7 +132,7 @@ struct CreateTodoView: View {
     /// The button is placed within an `HStack` with spacers to align it to the right side
     /// of its container, and it includes padding for spacing around the button.
     ///
-    /// The button's action is linked to the ``submitTodo`` method, which handles the logic
+    /// The button's action is linked to the `submitTodo` method, which handles the logic
     /// for saving or processing the new to-do item.
     var submitButton: some View {
         HStack {
@@ -158,7 +157,7 @@ struct CreateTodoView: View {
     /// Submits the new to-do item.
     ///
     /// This function is triggered when the user taps the submit button. It performs the following steps:
-    /// 1. Creates a new to-do item using the ``ToDoViewModel``'s ``createItem`` method, passing the title of the to-do
+    /// 1. Creates a new to-do item using the ``ToDoViewModel``'s `createItem` method, passing the title of the to-do
     ///    and the user's unique identifier (`userUID`). The user ID is retrieved from the ``AuthViewModel``.
     /// 2. Upon successful creation of the to-do item, the `createTodoPresented` state is toggled to dismiss
     ///    the current view and return to the previous screen.
