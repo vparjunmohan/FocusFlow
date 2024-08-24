@@ -7,33 +7,36 @@
 
 import SwiftUI
 
-/// A view that displays a list of priorities.
+/// A view that displays a list of priorities for selection.
 ///
-/// This view presents a vertical list of priority items, each with an icon and name.
-/// The list uses a custom ``PriorityModel`` to define the items and their associated colors.
-/// Each priority is displayed in a horizontal stack with a separator line between items,
-/// except for the last item.
+/// This view presents a vertical list of priority items, each represented with an icon and name.
+/// The list is based on a custom ``PriorityModel`` that defines the priorities and their associated colors.
+/// Each priority is displayed in a horizontal stack with a separator line between items, except for the last item.
 ///
-/// - `priorities`: An array of `PriorityModel` instances representing the list of priorities
-///   to be displayed. This property is private to ensure it is only used within the ``PriorityListView``.
+/// - `selectedPriority`: A binding to the currently selected priority, allowing the parent view to be updated.
+/// - `showPicker`: A binding that controls the visibility of the priority picker.
+/// - `priorities`: A private array of `PriorityModel` instances representing the list of priorities to be displayed.
 struct PriorityListView: View {
-    
+    @Binding var selectedPriority: String
+    @Binding var showPicker: Bool
     private let priorities = PriorityModel.allPriorities
     
-    /// The view's body, which defines the layout and appearance of the priority list.
+    /// The main content of the `PriorityListView`, defining the layout and appearance of the priority list.
     ///
-    /// This view uses a vertical stack (`VStack`) to display a list of priority items. Each item is
-    /// represented by a horizontal stack (`HStack`) containing an icon and a label. The list is
-    /// generated using a `ForEach` loop with the priorities array, where each item is processed by
-    /// the ``priorityRow(for:isLast:)`` function to determine if a separator should be included.
+    /// The `body` uses a vertical stack (`VStack`) to organize a list of priority items. Each item is represented by a horizontal stack (`HStack`) containing an icon and a label. The list is generated using a `ForEach` loop that iterates over the `priorities` array. The ``priorityRow(for:isLast:)`` function is used to create each row, and it determines whether a separator should be included.
     ///
-    /// - The `VStack` is aligned to the leading edge and provides padding around the vertical axis.
-    /// - The background color of the stack is set to `AppColors.cardColor` with rounded corners.
-    /// - Additional padding is applied around the entire view to ensure spacing from its container.
+    /// - The `VStack` is aligned to the leading edge and includes padding around the vertical axis.
+    /// - The background color of the stack is set to `AppColors.cardColor` and is enclosed in a rounded rectangle with a shadow effect.
+    /// - The view is constrained in width to a portion of the screen width and includes padding around the entire view for spacing from its container.
+    /// - When a priority is tapped, the `selectedPriority` is updated, and the picker view is dismissed by toggling `showPicker`.
     var body: some View {
         VStack(alignment: .leading) {
             ForEach(Array(priorities.enumerated()), id: \.element) { index, priority in
                 priorityRow(for: priority, isLast: index == priorities.count - 1)
+                    .onTapGesture {
+                        selectedPriority = priority.name
+                        showPicker.toggle()
+                    }
             }
         }
         .frame(maxWidth: UIScreen.main.bounds.width / 1.25)
@@ -115,5 +118,5 @@ struct PriorityListView: View {
 }
 
 #Preview {
-    PriorityListView()
+    PriorityListView(selectedPriority: .constant("Priority 1"), showPicker: .constant(true))
 }

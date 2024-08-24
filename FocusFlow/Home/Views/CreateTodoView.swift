@@ -23,7 +23,7 @@ struct CreateTodoView: View {
     var titlePlaceholder: String = "e.g., Go to gym tomorrow"
     var descriptionPlaceholder: String = "Description"
     
-    @State var selection = "Priority"
+    @State var selectedPriority = "Priority"
     @State private var showPicker = false
     
     var body: some View {
@@ -36,7 +36,7 @@ struct CreateTodoView: View {
                 
                 VStack(alignment: .leading, spacing: AppSpacers.small) {
                     if showPicker {
-                        PriorityListView()
+                        PriorityListView(selectedPriority: $selectedPriority, showPicker: $showPicker)
                     }
                     priorityButton
                 }
@@ -80,7 +80,6 @@ struct CreateTodoView: View {
                 .font(FontHelper.applyFont(forTextStyle: .body, weight: .regular))
                 .colorMultiply(AppColors.appBgColor)
                 .padding(.horizontal, AppSpacers.large)
-            //                .colorMultiply(.yellow)
             
             if todoDescription.isEmpty {
                 Text(descriptionPlaceholder)
@@ -93,13 +92,22 @@ struct CreateTodoView: View {
         }
     }
     
+    /// A button that allows the user to select a priority level for a task.
+    ///
+    /// - Action: When tapped, the button toggles the visibility of a priority picker.
+    /// - Appearance: The button displays a flag icon next to the currently selected priority text.
+    ///   It is styled with custom fonts, colors, and padding, and features a rounded rectangle
+    ///   background with a stroked border.
+    ///
+    /// - The button's label consists of an `HStack` containing an icon and text.
+    /// - The button is padded internally and has additional padding on the leading edge.
     var priorityButton: some View {
         Button {
             showPicker.toggle()
         } label: {
             HStack {
                 Image(systemName: "flag")
-                Text(selection)
+                Text(selectedPriority)
                     .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             }
             .foregroundStyle(AppColors.labelColor)
@@ -111,7 +119,6 @@ struct CreateTodoView: View {
         )
         .padding(.leading, AppSpacers.large)
     }
-    
     
     /// A button for submitting the new to-do item.
     ///
