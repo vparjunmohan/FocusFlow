@@ -13,12 +13,12 @@ import SwiftUI
 /// such as its title and description. It integrates with view models for managing to-do data and
 /// authentication. This view is presented as a sheet and allows users to input and save new tasks.
 struct CreateTodoView: View {
-    @ObservedObject var viewModel: ToDoViewModel
     @EnvironmentObject var appUserViewModel: AuthViewModel
+    @StateObject var createTodoViewModel = CreateTodoViewModel()
+    @ObservedObject var todoViewModel: ToDoViewModel
     @Binding var createTodoPresented: Bool
     @State var todoTitle: String = ""
     @State var todoDescription: String = ""
-    @State var selectedPriority = "Priority"
     @State private var showPicker = false
     @FocusState var isTodoTitleFocused: Bool
     
@@ -35,7 +35,7 @@ struct CreateTodoView: View {
                 
                 VStack(alignment: .leading, spacing: AppSpacers.small) {
                     if showPicker {
-                        PriorityListView(selectedPriority: $selectedPriority, showPicker: $showPicker)
+                        PriorityListView(selectedPriority: $createTodoViewModel.selectedPriority, showPicker: $showPicker)
                             .transition(.opacity)
                             .animation(.easeInOut(duration: 0.3), value: showPicker)
                     }
@@ -93,15 +93,15 @@ struct CreateTodoView: View {
         }
     }
     
-    /// A button that allows the user to select a priority level for a task.
+    /// A button that allows the user to select or change the priority level for a task.
     ///
-    /// - Action: When tapped, the button toggles the visibility of a priority picker with an ease-in-out animation over 0.3 seconds.
-    /// - Appearance: The button displays a flag icon next to the currently selected priority text.
-    ///   It is styled with custom fonts, colors, and padding, and features a rounded rectangle background with a stroked border.
-    ///   The button is padded internally and has additional padding on the leading edge to ensure proper spacing.
-    ///   The height of the button is set to a constant value defined by `AppComponentSize.taskOptionsButtonHeight`.
-    ///
-    /// - The button's label consists of an `HStack` containing an icon and text, styled with the font and color specified in the app's design.
+    /// - Action: When tapped, the button toggles the visibility of the priority picker with an animated transition.
+    /// - Appearance: The button displays a flag icon that reflects the current priority level.
+    ///   If a priority is selected, the icon is filled (`flag.fill`); otherwise, it shows an unfilled flag (`flag`).
+    ///   The button also displays the current priority title next to the icon.
+    ///   The text and icon are styled with a custom font and the selected priority's color. If no color is set, a default label color is used.
+    ///   The button has padding, a rounded rectangle background with a stroked border, and is positioned with additional leading padding.
+    /// - Layout: The button is constrained to a specific height and internally padded horizontally and vertically for a balanced layout.
     var priorityButton: some View {
         Button {
             withAnimation(.easeInOut(duration: 0.3)) {
@@ -109,11 +109,13 @@ struct CreateTodoView: View {
             }
         } label: {
             HStack {
-                Image(systemName: "flag")
-                Text(selectedPriority)
-                    .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
+                Image(systemName: (createTodoViewModel.selectedPriority.name?.isEmpty == false) ? "flag.fill" : "flag")
+                Text(
+                    createTodoViewModel.updatePriorityTitle(priority: createTodoViewModel.selectedPriority)
+                )
+                .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             }
-            .foregroundStyle(AppColors.labelColor)
+            .foregroundStyle(createTodoViewModel.selectedPriority.priorityColor ?? AppColors.labelColor)
             .padding(.horizontal, AppSpacers.medium)
             .padding(.vertical, AppSpacers.small)
             .background(
@@ -167,8 +169,8 @@ struct CreateTodoView: View {
     func submitTodo() {
         Task {
             do {
-                try await viewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "")
-                try await viewModel.fetchItems(uid: appUserViewModel.appUser?.id ?? "")
+                try await todoViewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "")
+                try await todoViewModel.fetchItems(uid: appUserViewModel.appUser?.id ?? "")
                 createTodoPresented.toggle()
             } catch {
                 print("Failed to create todo")
@@ -179,6 +181,6 @@ struct CreateTodoView: View {
 
 
 #Preview {
-    CreateTodoView(viewModel: ToDoViewModel(), createTodoPresented: .constant(false))
+    CreateTodoView(todoViewModel: .init(), createTodoPresented: .constant(false))
         .environmentObject(AuthViewModel()) // Inject the environment object for appUserViewModel
 }

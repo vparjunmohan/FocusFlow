@@ -17,7 +17,7 @@ import SwiftUI
 /// - `showPicker`: A binding that controls the visibility of the priority picker.
 /// - `priorities`: A private array of `PriorityModel` instances representing the list of priorities to be displayed.
 struct PriorityListView: View {
-    @Binding var selectedPriority: String
+    @Binding var selectedPriority: PriorityModel
     @Binding var showPicker: Bool
     private let priorities = PriorityModel.allPriorities
     
@@ -65,7 +65,7 @@ struct PriorityListView: View {
         .contentShape(Rectangle())
         .onTapGesture {
             withAnimation(.easeInOut(duration: 0.3)) {
-                selectedPriority = priority.name
+                selectedPriority = priority
                 showPicker.toggle()
             }
         }
@@ -83,7 +83,7 @@ struct PriorityListView: View {
     func priorityIcon(for priority: PriorityModel) -> some View {
         Image(systemName: "flag.fill")
             .padding(.horizontal, AppSpacers.medium)
-            .foregroundStyle(priority.priorityColor)
+            .foregroundStyle(priority.priorityColor ?? .clear)
     }
     
     /// A view that displays the information for a priority item, with an optional separator.
@@ -99,7 +99,7 @@ struct PriorityListView: View {
     /// - Returns: A `VStack` containing the priority name and, optionally, a separator.
     func priorityInfo(for priority: PriorityModel, showSeparator: Bool) -> some View {
         VStack(alignment: .leading, spacing: AppSpacers.xsmall) {
-            Text(priority.name)
+            Text(priority.name ?? "")
                 .font(FontHelper.applyFont(forTextStyle: .subheadline))
                 .padding(AppSpacers.small)
                 .frame(maxWidth: .infinity, alignment: .leading)
@@ -124,5 +124,5 @@ struct PriorityListView: View {
 }
 
 #Preview {
-    PriorityListView(selectedPriority: .constant("Priority 1"), showPicker: .constant(true))
+    PriorityListView(selectedPriority: .constant(.priority1), showPicker: .constant(true))
 }

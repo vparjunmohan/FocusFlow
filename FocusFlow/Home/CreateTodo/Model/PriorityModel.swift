@@ -18,8 +18,13 @@ import SwiftUI
 ///   - priorityColor: The color associated with the priority level,
 ///     which can be used for visual representation in the UI.
 struct PriorityModel: Hashable {
-    let name: String
-    let priorityColor: Color
+    let name: String?
+    let priorityColor: Color?
+    
+   init(name: String? = nil, priorityColor: Color? = nil) {
+       self.name = name
+       self.priorityColor = priorityColor
+   }
     
     static let priority1 = PriorityModel(name: "Priority 1", priorityColor: AppColors.priority1)
     static let priority2 = PriorityModel(name: "Priority 2", priorityColor: AppColors.priority2)

@@ -236,10 +236,8 @@
 		DEC03DFC2C6E0DD2004728BA /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				DEE7E2A02C7A6C0200571816 /* TodoDashboard */,
 				DEC679542C7A555400A12B70 /* CreateTodo */,
-				DEC03E242C6F5D1E004728BA /* Model */,
-				DEC03E312C6FCDE1004728BA /* Views */,
-				DEC03E232C6F5D0F004728BA /* ViewModel */,
 				DEC03E1E2C6F50AD004728BA /* Manager */,
 			);
 			path = Home;
@@ -303,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				DEC03E252C6F5D30004728BA /* Todos.swift */,
-				DE9720802C73B91500EC2F81 /* PriorityModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -354,6 +351,7 @@
 		DEC679542C7A555400A12B70 /* CreateTodo */ = {
 			isa = PBXGroup;
 			children = (
+				DEE7E29F2C7A6BC000571816 /* Model */,
 				DEC679562C7A558C00A12B70 /* ViewModel */,
 				DEC679552C7A556100A12B70 /* Views */,
 			);
@@ -375,6 +373,24 @@
 				DEC679572C7A559D00A12B70 /* CreateTodoViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DEE7E29F2C7A6BC000571816 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DE9720802C73B91500EC2F81 /* PriorityModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DEE7E2A02C7A6C0200571816 /* TodoDashboard */ = {
+			isa = PBXGroup;
+			children = (
+				DEC03E242C6F5D1E004728BA /* Model */,
+				DEC03E312C6FCDE1004728BA /* Views */,
+				DEC03E232C6F5D0F004728BA /* ViewModel */,
+			);
+			path = TodoDashboard;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
