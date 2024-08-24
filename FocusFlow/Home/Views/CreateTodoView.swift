@@ -37,6 +37,8 @@ struct CreateTodoView: View {
                 VStack(alignment: .leading, spacing: AppSpacers.small) {
                     if showPicker {
                         PriorityListView(selectedPriority: $selectedPriority, showPicker: $showPicker)
+                            .transition(.opacity)
+                            .animation(.easeInOut(duration: 0.3), value: showPicker)
                     }
                     priorityButton
                 }
@@ -94,16 +96,18 @@ struct CreateTodoView: View {
     
     /// A button that allows the user to select a priority level for a task.
     ///
-    /// - Action: When tapped, the button toggles the visibility of a priority picker.
+    /// - Action: When tapped, the button toggles the visibility of a priority picker with an ease-in-out animation over 0.3 seconds.
     /// - Appearance: The button displays a flag icon next to the currently selected priority text.
-    ///   It is styled with custom fonts, colors, and padding, and features a rounded rectangle
-    ///   background with a stroked border.
+    ///   It is styled with custom fonts, colors, and padding, and features a rounded rectangle background with a stroked border.
+    ///   The button is padded internally and has additional padding on the leading edge to ensure proper spacing.
+    ///   The height of the button is set to a constant value defined by `AppComponentSize.taskOptionsButtonHeight`.
     ///
-    /// - The button's label consists of an `HStack` containing an icon and text.
-    /// - The button is padded internally and has additional padding on the leading edge.
+    /// - The button's label consists of an `HStack` containing an icon and text, styled with the font and color specified in the app's design.
     var priorityButton: some View {
         Button {
-            showPicker.toggle()
+            withAnimation(.easeInOut(duration: 0.3)) {
+                showPicker.toggle()
+            }
         } label: {
             HStack {
                 Image(systemName: "flag")
@@ -111,13 +115,15 @@ struct CreateTodoView: View {
                     .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             }
             .foregroundStyle(AppColors.labelColor)
+            .padding(.horizontal, AppSpacers.medium)
+            .padding(.vertical, AppSpacers.small)
+            .background(
+                RoundedRectangle(cornerRadius: AppCornerCurves.xsmall)
+                    .stroke(AppColors.stokeColor, lineWidth: 1)
+            )
         }
-        .padding(.all, AppSpacers.small)
-        .background(
-            RoundedRectangle(cornerRadius: AppCornerCurves.xsmall)
-                .stroke(AppColors.stokeColor, lineWidth: 1)
-        )
         .padding(.leading, AppSpacers.large)
+        .frame(height: AppComponentSize.taskOptionsButtonHeight)
     }
     
     /// A button for submitting the new to-do item.

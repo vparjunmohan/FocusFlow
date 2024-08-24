@@ -34,8 +34,10 @@ struct PriorityListView: View {
             ForEach(Array(priorities.enumerated()), id: \.element) { index, priority in
                 priorityRow(for: priority, isLast: index == priorities.count - 1)
                     .onTapGesture {
-                        selectedPriority = priority.name
-                        showPicker.toggle()
+                        withAnimation(.easeInOut(duration: 0.3)) {
+                            selectedPriority = priority.name
+                            showPicker.toggle()
+                        }
                     }
             }
         }

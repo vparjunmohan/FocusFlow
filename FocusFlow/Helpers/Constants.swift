@@ -117,6 +117,9 @@ struct AppComponentSize {
     
     /// The standard height for task view, set to 70 points.
     static let taskViewHeight: CGFloat = 70
+    
+    /// The standard height for task options button, set to 44 points.
+    static let taskOptionsButtonHeight: CGFloat = 44
 }
 
 //MARK: - AppColors
