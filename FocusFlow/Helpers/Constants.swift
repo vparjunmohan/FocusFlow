@@ -141,14 +141,15 @@ struct AppComponentSize {
 /// - `priority3`: The color associated with "Priority 3" items, ensuring a clear distinction among task priorities.
 /// - `priority4`: The color associated with "Priority 4" items, maintaining a uniform approach to lower-priority tasks.
 struct AppColors {
-    static let appBgColor: Color = Color("AppBgColor")
-    static let cardColor: Color = Color("AppCardColor")
-    static let themeColor: Color = Color("AppThemeColor")
-    static let dangerColor: Color = Color("AppDangerColor")
-    static let stokeColor: Color = Color("AppStrokeColor")
-    static let labelColor: Color = Color("AppLabelColor")
-    static let priority1: Color = Color("Priority1Color")
-    static let priority2: Color = Color("Priority2Color")
-    static let priority3: Color = Color("Priority3Color")
-    static let priority4: Color = Color("Priority4Color")
+    static let appBgColor: Color = .appBg
+    static let cardColor: Color = .appCard
+    static let themeColor: Color = .appTheme
+    static let dangerColor: Color = .appDanger
+    static let stokeColor: Color = .appStroke
+    static let labelColor: Color = .appLabel
+    static let textColor: Color = .appText
+    static let priority1: Color = .priority1
+    static let priority2: Color = .priority2
+    static let priority3: Color = .priority3
+    static let priority4: Color = .priority4
 }

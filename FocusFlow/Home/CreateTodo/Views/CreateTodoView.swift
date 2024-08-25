@@ -28,7 +28,7 @@ struct CreateTodoView: View {
     var body: some View {
         ZStack {
             AppColors.appBgColor.ignoresSafeArea()
-            VStack(alignment: .leading) {
+            VStack(alignment: .leading, spacing: 0) {
                 todoTitleField
                 
                 todoDescriptionEditor
@@ -41,6 +41,8 @@ struct CreateTodoView: View {
                     }
                     priorityButton
                 }
+                
+                divider
                 
                 submitButton
             }
@@ -127,6 +129,24 @@ struct CreateTodoView: View {
         .frame(height: AppComponentSize.taskOptionsButtonHeight)
     }
     
+    /// A custom divider view used to separate sections of content.
+    ///
+    /// This view consists of a `Rectangle` filled with a stroke color from `AppColors`.
+    /// The rectangle has a fixed height of 1 point and spans the maximum available width.
+    /// The divider also includes a top padding to add space before it is rendered.
+    ///
+    /// - The fill color is determined by the `AppColors.stokeColor`.
+    /// - The height is fixed to 1 point.
+    /// - The width is set to span the entire available width (`maxWidth`).
+    /// - Top padding is applied using `AppSpacers.medium`.
+    var divider: some View {
+        Rectangle()
+            .fill(AppColors.stokeColor)
+            .frame(height: 1)
+            .frame(maxWidth: .infinity)
+            .padding(.top, AppSpacers.medium)
+    }
+    
     /// A button for submitting the new to-do item.
     ///
     /// This button is used to trigger the action of submitting the new to-do item. It is
@@ -151,7 +171,7 @@ struct CreateTodoView: View {
                 }
             })
             .padding(.horizontal, AppSpacers.large)
-            .padding(.vertical, AppSpacers.small)
+            .padding(.vertical, AppSpacers.medium)
         }
     }
     
