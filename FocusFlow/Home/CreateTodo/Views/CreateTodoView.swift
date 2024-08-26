@@ -179,17 +179,18 @@ struct CreateTodoView: View {
     /// Submits the new to-do item.
     ///
     /// This function is triggered when the user taps the submit button. It performs the following steps:
-    /// 1. Creates a new to-do item using the ``ToDoViewModel``'s `createItem` method, passing the title of the to-do
-    ///    and the user's unique identifier (`userUID`). The user ID is retrieved from the ``AuthViewModel``.
-    /// 2. Upon successful creation of the to-do item, the `createTodoPresented` state is toggled to dismiss
-    ///    the current view and return to the previous screen.
-    /// 3. If an error occurs during the item creation, an error message is printed to the console.
+    /// 1. Creates a new to-do item using the `ToDoViewModel`'s `createItem` method, passing the to-do title,
+    ///    description, priority, and the user's unique identifier (`userUID`). The user ID is retrieved from the ``AppUserViewModel``.
+    /// 2. After successfully creating the to-do item, it fetches the updated list of to-do items using the `fetchItems` method of the ``ToDoViewModel``,
+    ///    ensuring the latest data is displayed.
+    /// 3. Toggles the `createTodoPresented` state to dismiss the current view and return to the previous screen.
+    /// 4. If an error occurs during the item creation or fetching, an error message is printed to the console.
     ///
-    /// This function is asynchronous and uses Swift’s concurrency model (`async/await`) to handle the task.
+    /// This function is asynchronous and uses Swift's concurrency model (`async/await`) to handle the task.
     func submitTodo() {
         Task {
             do {
-                try await todoViewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "")
+                try await todoViewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "", priority: createTodoViewModel.selectedPriority.name ?? "")
                 try await todoViewModel.fetchItems(uid: appUserViewModel.appUser?.id ?? "")
                 createTodoPresented.toggle()
             } catch {

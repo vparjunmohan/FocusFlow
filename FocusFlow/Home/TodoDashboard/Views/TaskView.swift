@@ -64,17 +64,49 @@ struct TaskView: View {
         }
     }
     
-    /// An icon indicating the task's priority.
+    /// A view that displays a flag icon based on the priority of a to-do item.
     ///
-    /// The `taskPriorityFlag` is a simple image view that displays a flag icon. This icon
-    /// serves as a visual indicator of the task's priority level. It uses a system image
-    /// named "flag" to ensure a consistent appearance across different platforms.
+    /// The `taskPriorityFlag` property conditionally displays a filled flag icon if the `priority` of the `todos` object is not empty.
+    /// The color of the flag icon is determined by the `updateTaskPriority(todo:)` function, which maps the priority string to a corresponding color.
+    /// If the priority is empty, the view will render an `EmptyView`, effectively showing nothing.
+    ///
+    /// - Returns: A `View` that displays a colored flag icon for the to-do item's priority or an empty view if no priority is set.
     var taskPriorityFlag: some View {
-        Image(systemName: "flag")
+        Group {
+            if !todos.priority.isEmpty {
+                Image(systemName: "flag.fill")
+                    .foregroundStyle(updateTaskPriority(todo: todos))
+            } else {
+                EmptyView()
+            }
+        }
+    }
+    
+    /// Returns the appropriate color for a given to-do item's priority.
+    ///
+    /// The `updateTaskPriority` function maps the `priority` string of a `Todos` object to a specific color.
+    /// This color is used to visually represent the priority of the task in the UI.
+    ///
+    /// - Parameter todo: A `Todos` object containing the priority information.
+    /// - Returns: A `Color` corresponding to the task's priority. If the priority doesn't match any predefined values, `Color.clear` is returned.
+    func updateTaskPriority(todo: Todos) -> Color {
+        switch todo.priority {
+        case "Priority 1":
+            return AppColors.priority1
+        case "Priority 2":
+            return AppColors.priority2
+        case "Priority 3":
+            return AppColors.priority3
+        case "Priority 4":
+            return AppColors.priority4
+        default:
+            return Color.clear
+            
+        }
     }
 }
 
 
 #Preview {
-    TaskView(todos: .init(id: 1, createdAt: "12/8", todo: "Task 1", userUID: "userid", taskDescription: ""))
+    TaskView(todos: .init(id: 1, createdAt: "12/8", todo: "Task 1", userUID: "userid", taskDescription: "", priority: "priority 1"))
 }
