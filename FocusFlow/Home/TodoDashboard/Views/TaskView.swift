@@ -34,7 +34,7 @@ struct TaskView: View {
             Spacer(minLength: 0)
         }
         .padding(.all, AppSpacers.large)
-        .frame(height: 70)
+        .frame(height: AppComponentSize.taskViewHeight)
         .background(AppColors.cardColor)
         .clipShape(RoundedRectangle(cornerRadius: AppCornerCurves.small))
     }
@@ -67,7 +67,7 @@ struct TaskView: View {
         VStack(alignment: .leading, spacing: AppSpacers.xsmall) {
             Text(todos.task)
                 .font(FontHelper.applyFont(forTextStyle: .headline, weight: .regular))
-            HStack(spacing: AppSpacers.small){
+            HStack(spacing: AppSpacers.medium) {
                 Text("18/08")
                     .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .regular))
                 if !todos.priority.isEmpty {

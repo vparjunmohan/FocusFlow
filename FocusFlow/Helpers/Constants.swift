@@ -119,8 +119,8 @@ struct AppComponentSize {
     /// The standard height for day brief card, set to 200 points.
     static let dayBriefCardHeight: CGFloat = 200
     
-    /// The standard height for task view, set to 70 points.
-    static let taskViewHeight: CGFloat = 70
+    /// The standard height for task view, set to 75 points.
+    static let taskViewHeight: CGFloat = 75
     
     /// The standard height for task options button, set to 44 points.
     static let taskOptionsButtonHeight: CGFloat = 44
