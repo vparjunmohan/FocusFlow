@@ -24,6 +24,7 @@ struct URLS {
 /// It helps maintain a consistent layout and design language across different views.
 ///
 /// - `unity`: Very small spacer, typically used for very tight spacing.
+/// - `xxsmall`: Extra small spacer, typically used for very tight spacing.
 /// - `xsmall`: Extra small spacer, typically used for very tight spacing.
 /// - `small`: Small spacer, used for minor gaps or padding.
 /// - `medium`: Medium spacer, for moderate gaps or padding.
@@ -31,6 +32,9 @@ struct URLS {
 struct AppSpacers {
     /// A  small space of 1 points, used for stroke or very thin line
     static let unity: CGFloat = 1
+    
+    /// Extra small space of 2 points, used for very tight spacing
+    static let xxsmall: CGFloat = 2
     
     /// Extra small space of 4 points, used for very tight spacing
     static let xsmall: CGFloat = 4

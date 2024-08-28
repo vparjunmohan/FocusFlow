@@ -14,8 +14,16 @@ import SwiftUI
 /// and an icon indicating the task's priority. The layout is designed with consistent
 /// spacing, padding, and styling to ensure a cohesive appearance in the app.
 struct TaskView: View {
+    
     var todos: Todos
     
+    /// A horizontal stack displaying a task completion button, task details, and a spacer for layout.
+    ///
+    /// This view arranges the task's elements in a horizontal line with a large spacing between them.
+    /// It includes a button to mark the task as completed, the task details (title, date, and priority),
+    /// and a spacer to push the elements to the left, ensuring a balanced layout. The entire stack is
+    /// padded uniformly and contained within a rounded rectangle with a background color, giving it
+    /// a card-like appearance. The height is fixed at 70 points to maintain a consistent visual style.
     var body: some View {
         HStack(spacing: AppSpacers.large) {
             
@@ -24,8 +32,6 @@ struct TaskView: View {
             taskDetails
             
             Spacer(minLength: 0)
-            
-            taskPriorityFlag
         }
         .padding(.all, AppSpacers.large)
         .frame(height: 70)
@@ -50,34 +56,33 @@ struct TaskView: View {
         }
     }
     
-    /// A vertical stack displaying the task's title and date.
+    /// A vertical stack displaying the task's title, due date, and priority level (if available).
     ///
-    /// The `taskDetails` view presents the main information about the task, including its title and due date.
-    /// The title is styled using the headline font, while the date is displayed with a smaller caption font.
-    /// The text elements are aligned to the leading edge, with a small vertical spacing between them.
+    /// The `taskDetails` view presents the main information about the task, including its title, due date,
+    /// and priority level (if specified). The title is styled using the headline font, while the date and priority
+    /// are displayed with a smaller subheadline font. If a priority is present, it is shown with bold text and
+    /// a colored background based on its priority level. The text elements are aligned to the leading edge, with
+    /// appropriate spacing between them, ensuring a clear and organized layout.
     var taskDetails: some View {
         VStack(alignment: .leading, spacing: AppSpacers.xsmall) {
             Text(todos.task)
                 .font(FontHelper.applyFont(forTextStyle: .headline, weight: .regular))
-            Text("18/08")
-                .font(FontHelper.applyFont(forTextStyle: .caption, weight: .regular))
-        }
-    }
-    
-    /// A view that displays a flag icon based on the priority of a to-do item.
-    ///
-    /// The `taskPriorityFlag` property conditionally displays a filled flag icon if the `priority` of the `todos` object is not empty.
-    /// The color of the flag icon is determined by the `updateTaskPriority(todo:)` function, which maps the priority string to a corresponding color.
-    /// If the priority is empty, the view will render an `EmptyView`, effectively showing nothing.
-    ///
-    /// - Returns: A `View` that displays a colored flag icon for the to-do item's priority or an empty view if no priority is set.
-    var taskPriorityFlag: some View {
-        Group {
-            if !todos.priority.isEmpty {
-                Image(systemName: "flag.fill")
-                    .foregroundStyle(updateTaskPriority(todo: todos))
-            } else {
-                EmptyView()
+            HStack(spacing: AppSpacers.small){
+                Text("18/08")
+                    .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .regular))
+                if !todos.priority.isEmpty {
+                    Text(getPriority(todo: todos))
+                        .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .bold))
+                        .foregroundStyle(AppColors.textColor)
+                        .padding(AppSpacers.xxsmall)
+                        .padding(.horizontal, AppSpacers.xxsmall)
+                        .background(
+                            RoundedRectangle(cornerRadius: AppSpacers.xsmall)
+                                .fill(updateTaskPriority(todo: todos))
+                        )
+                } else {
+                    EmptyView()
+                }
             }
         }
     }
@@ -101,7 +106,25 @@ struct TaskView: View {
             return AppColors.priority4
         default:
             return Color.clear
-            
+        }
+    }
+    
+    /// Returns a shorthand representation of the priority level for a given todo item.
+    /// - Parameter todo: A `Todos` object containing the priority information.
+    /// - Returns: A string representing the shorthand priority level ("P1", "P2", "P3", "P4"),
+    ///            or an empty string if the priority does not match any predefined levels.
+    func getPriority(todo: Todos) -> String {
+        switch todo.priority {
+        case "Priority 1":
+            return "P1"
+        case "Priority 2":
+            return "P2"
+        case "Priority 3":
+            return "P3"
+        case "Priority 4":
+            return "P4"
+        default:
+            return ""
         }
     }
 }
