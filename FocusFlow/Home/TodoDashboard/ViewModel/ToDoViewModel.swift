@@ -26,18 +26,22 @@ class ToDoViewModel: ObservableObject {
         
     /// Asynchronously creates a new to-do item and saves it to the database.
     ///
-    /// The `createItem` function constructs a `TodoPayload` object using the provided
-    /// task title, description, user UID, and priority, and then saves it to the database using the `DatabaseManager`.
-    /// If the operation fails, the function throws an error, which can be handled by the caller.
+    /// The `createItem` function constructs a `TodoPayload` object with the provided parameters and
+    /// saves it to the database using `DatabaseManager`. It performs the following steps:
+    /// 1. Creates a `TodoPayload` object with the title, description, user UID, priority, and due date.
+    /// 2. Calls `DatabaseManager.shared.createTodoItem` to save the to-do item to the database.
+    ///
+    /// If the operation fails, the function throws an error which should be handled by the caller.
     ///
     /// - Parameters:
     ///   - text: The title or name of the to-do item.
     ///   - description: A detailed description of the to-do item.
     ///   - userUID: The unique identifier of the user creating the to-do item.
     ///   - priority: The priority level assigned to the to-do item.
+    ///   - duedate: The due date for the to-do item, represented as a Unix timestamp in seconds (`Int`).
     /// - Throws: An error if the to-do item could not be created or saved to the database.
-    func createItem(text: String, description: String, userUID: String, priority: String) async throws {
-        let todo = TodoPayload(task: text, taskDescription: description, userUID: userUID, priority: priority)
+    func createItem(text: String, description: String, userUID: String, priority: String, duedate: Int) async throws {
+        let todo = TodoPayload(task: text, taskDescription: description, userUID: userUID, priority: priority, duedate: duedate)
         try await DatabaseManager.shared.createTodoItem(item: todo)
     }
     

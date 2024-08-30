@@ -176,21 +176,36 @@ struct CreateTodoView: View {
     }
     
     // MARK: - Actions
-    /// Submits the new to-do item.
+    /// Submits the new to-do item to the backend and updates the UI.
     ///
-    /// This function is triggered when the user taps the submit button. It performs the following steps:
-    /// 1. Creates a new to-do item using the `ToDoViewModel`'s `createItem` method, passing the to-do title,
-    ///    description, priority, and the user's unique identifier (`userUID`). The user ID is retrieved from the ``AppUserViewModel``.
-    /// 2. After successfully creating the to-do item, it fetches the updated list of to-do items using the `fetchItems` method of the ``ToDoViewModel``,
-    ///    ensuring the latest data is displayed.
-    /// 3. Toggles the `createTodoPresented` state to dismiss the current view and return to the previous screen.
-    /// 4. If an error occurs during the item creation or fetching, an error message is printed to the console.
+    /// This asynchronous function is triggered when the user taps the submit button to create a new to-do item.
+    /// It performs the following actions:
     ///
-    /// This function is asynchronous and uses Swift's concurrency model (`async/await`) to handle the task.
+    /// 1. **Create To-Do Item:**
+    ///    - Calls the `createItem` method of the `ToDoViewModel`, passing the to-do title, description, priority,
+    ///      and due date (in Unix timestamp format), along with the user's unique identifier (`userUID`).
+    ///    - The `userUID` is retrieved from the `AppUserViewModel`.
+    ///
+    /// 2. **Fetch Updated To-Do List:**
+    ///    - After successfully creating the to-do item, it calls the `fetchItems` method of the `ToDoViewModel`
+    ///      to retrieve the latest list of to-do items from the backend, ensuring the UI reflects the most recent data.
+    ///
+    /// 3. **Dismiss Create To-Do View:**
+    ///    - Toggles the `createTodoPresented` state, which dismisses the current view and returns the user to the previous screen.
+    ///
+    /// 4. **Error Handling:**
+    ///    - If any errors occur during the creation of the to-do item or fetching of the updated list, the function catches the error
+    ///      and prints an error message to the console.
+    ///
+    /// The function uses Swift's concurrency model (`async/await`) to perform these tasks asynchronously, ensuring that
+    /// the UI remains responsive while the operations are being performed.
+    ///
+    /// - Note: The function assumes that the `AppUserViewModel` and `ToDoViewModel` are properly initialized and contain
+    ///         valid data required for creating and fetching to-do items.
     func submitTodo() {
         Task {
             do {
-                try await todoViewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "", priority: createTodoViewModel.selectedPriority.name ?? "")
+                try await todoViewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "", priority: createTodoViewModel.selectedPriority.name ?? "", duedate: Int(Date().timeIntervalSince1970))
                 try await todoViewModel.fetchItems(uid: appUserViewModel.appUser?.id ?? "")
                 createTodoPresented.toggle()
             } catch {

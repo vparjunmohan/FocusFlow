@@ -58,22 +58,37 @@ struct TaskView: View {
     
     /// A vertical stack displaying the task's title, due date, and priority level (if available).
     ///
-    /// The `taskDetails` view presents the main information about the task, including its title, due date,
-    /// and priority level (if specified). The title is styled using the headline font, while the date and priority
-    /// are displayed with a smaller subheadline font. If a priority is present, it is shown with bold text and
-    /// a colored background based on its priority level. The text elements are aligned to the leading edge, with
-    /// appropriate spacing between them, ensuring a clear and organized layout.
+    /// The `taskDetails` view presents the primary information about a task, including:
+    /// - **Title:** The title of the task, styled using the headline font for prominence.
+    /// - **Due Date:** The due date of the task, if available, formatted as "dd-MM". It is displayed using a smaller subheadline font.
+    /// - **Priority Level:** If a priority is specified, it is shown with bold text and a background color that reflects its priority level. The priority text is styled using a subheadline font and is displayed with padding and rounded corners.
+    ///
+    /// The view is designed with:
+    /// - **Alignment:** All text elements are aligned to the leading edge.
+    /// - **Spacing:** There is appropriate vertical spacing between the title and the date/priority elements, and horizontal spacing between the date and priority elements.
+    ///
+    /// **Notes:**
+    /// - The due date is fetched using the `getDueDate` function, which converts a Unix timestamp to a formatted string.
+    /// - The priority level is determined by the `getPriority` function and styled with a background color provided by `updateTaskPriority`.
+    /// - An `EmptyView` is used if no priority is specified.
+    ///
+    /// - Parameters:
+    ///   - `todos`: The model object containing the task details.
     var taskDetails: some View {
         VStack(alignment: .leading, spacing: AppSpacers.xsmall) {
             Text(todos.task)
                 .font(FontHelper.applyFont(forTextStyle: .headline, weight: .regular))
             HStack(spacing: AppSpacers.medium) {
-                Text("18/08")
-                    .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .regular))
+                // TODO: Remove this check later
+                let duedate = getDueDate(timestamp: todos.duedate ?? 0)
+                if !duedate.isEmpty {
+                    Text(duedate)
+                        .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .regular))
+                }
                 if !todos.priority.isEmpty {
                     Text(getPriority(todo: todos))
                         .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .bold))
-                        .foregroundStyle(AppColors.textColor)
+                        .foregroundStyle(.white)
                         .padding(AppSpacers.xxsmall)
                         .padding(.horizontal, AppSpacers.xxsmall)
                         .background(
@@ -127,9 +142,32 @@ struct TaskView: View {
             return ""
         }
     }
+    
+    /// Converts a Unix timestamp (in seconds) to a formatted date string ("dd-MM").
+    ///
+    /// This function takes an integer Unix timestamp as input and converts it to a `Date` object.
+    /// It then formats the date into a string with the "dd-MM" format (day-month) using a `DateFormatter`.
+    /// If the timestamp is valid (greater than 0), it returns the formatted date string.
+    /// If the timestamp is invalid (0 or less), it returns an empty string.
+    ///
+    /// - Parameter timestamp: An integer representing the Unix timestamp in seconds.
+    /// - Returns: A formatted date string ("dd-MM") if the timestamp is valid, or an empty string if invalid.
+    func getDueDate(timestamp: Int) -> String {
+        if timestamp > 0 {
+            let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
+
+            let dateFormatter = DateFormatter()
+            dateFormatter.dateFormat = "dd-MM"
+
+            let formattedDate = dateFormatter.string(from: date)
+            return formattedDate
+        } else {
+            return ""
+        }
+    }
 }
 
 
 #Preview {
-    TaskView(todos: .init(id: 1, createdAt: "12/8", todo: "Task 1", userUID: "userid", taskDescription: "", priority: "priority 1"))
+    TaskView(todos: .init(id: 1, createdAt: "12/8", task: "Task 1", taskDescription: "userid", priority: "", userUID: "priority 1", duedate: 123432))
 }
