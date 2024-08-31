@@ -39,7 +39,7 @@ struct HomeView: View {
     /// to provide necessary authentication data to the `CreateTodoView`. The state binding
     /// `createTodoPresented` controls the visibility of this sheet.
     var createTodoSheet: some View {
-        CreateTodoView(viewModel: todoVM, createTodoPresented: $createTodoPresented)
+        CreateTodoView(todoViewModel: todoVM, createTodoPresented: $createTodoPresented)
             .environmentObject(authVM)
             .presentationDetents([.height(200)])
             .presentationDragIndicator(.visible)
