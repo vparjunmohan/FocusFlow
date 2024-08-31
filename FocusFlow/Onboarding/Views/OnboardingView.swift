@@ -15,7 +15,8 @@ struct OnboardingView: View {
             if authViewModel.isLoading {
                 ProgressView("Loading...")
             } else if let _ = authViewModel.appUser {
-                HomeView(authVM: authViewModel) // Ensure naming consistency
+                MainTabView(authViewModel: authViewModel)
+//                HomeView(authVM: authViewModel)
             } else {
                 SignInView(authViewModel: authViewModel)
             }
