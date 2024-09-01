@@ -20,6 +20,11 @@
 		DE97207D2C71FF1F00EC2F81 /* TaskView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97207C2C71FF1F00EC2F81 /* TaskView.swift */; };
 		DE97207F2C73B5D000EC2F81 /* PriorityListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE97207E2C73B5D000EC2F81 /* PriorityListView.swift */; };
 		DE9720812C73B91500EC2F81 /* PriorityModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE9720802C73B91500EC2F81 /* PriorityModel.swift */; };
+		DEB9E7412C848E7A001C35C5 /* Utilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9E7402C848E7A001C35C5 /* Utilities.swift */; };
+		DEB9E7462C849F4D001C35C5 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = DEB9E7452C849F4D001C35C5 /* Lottie */; };
+		DEB9E7482C849F97001C35C5 /* OfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9E7472C849F97001C35C5 /* OfflineView.swift */; };
+		DEB9E74B2C84A01C001C35C5 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9E74A2C84A01C001C35C5 /* LottieView.swift */; };
+		DEB9E74D2C84A090001C35C5 /* OfflineAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E74C2C84A090001C35C5 /* OfflineAnimation.json */; };
 		DEC03DEC2C6D26C8004728BA /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03DEB2C6D26C8004728BA /* SignInView.swift */; };
 		DEC03DEE2C6D27A8004728BA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03DED2C6D27A8004728BA /* AuthManager.swift */; };
 		DEC03DF12C6D2832004728BA /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DEC03DF02C6D2832004728BA /* Supabase */; };
@@ -86,6 +91,10 @@
 		DE97207C2C71FF1F00EC2F81 /* TaskView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskView.swift; sourceTree = "<group>"; };
 		DE97207E2C73B5D000EC2F81 /* PriorityListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityListView.swift; sourceTree = "<group>"; };
 		DE9720802C73B91500EC2F81 /* PriorityModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PriorityModel.swift; sourceTree = "<group>"; };
+		DEB9E7402C848E7A001C35C5 /* Utilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utilities.swift; sourceTree = "<group>"; };
+		DEB9E7472C849F97001C35C5 /* OfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineView.swift; sourceTree = "<group>"; };
+		DEB9E74A2C84A01C001C35C5 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
+		DEB9E74C2C84A090001C35C5 /* OfflineAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OfflineAnimation.json; sourceTree = "<group>"; };
 		DEC03DEB2C6D26C8004728BA /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		DEC03DED2C6D27A8004728BA /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		DEC03DF22C6D28A6004728BA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -120,6 +129,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DED345172C6D1A26000988C6 /* PostgREST in Frameworks */,
+				DEB9E7462C849F4D001C35C5 /* Lottie in Frameworks */,
 				DED345152C6D1A26000988C6 /* Functions in Frameworks */,
 				DEC03DF12C6D2832004728BA /* Supabase in Frameworks */,
 				DED345132C6D1A26000988C6 /* Auth in Frameworks */,
@@ -258,6 +268,7 @@
 				DE93D5102C6A888600B7E7A2 /* OnboardingView.swift */,
 				DEC03DEB2C6D26C8004728BA /* SignInView.swift */,
 				DE9720742C70AF2200EC2F81 /* MainTabView.swift */,
+				DEB9E7472C849F97001C35C5 /* OfflineView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -328,9 +339,12 @@
 		DEC03E352C6FEC15004728BA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				DEB9E74C2C84A090001C35C5 /* OfflineAnimation.json */,
 				DEC03DF22C6D28A6004728BA /* Constants.swift */,
 				DEC03E432C6FEDBC004728BA /* FontHelper.swift */,
 				DE97207A2C70CEEF00EC2F81 /* Extensions.swift */,
+				DEB9E7402C848E7A001C35C5 /* Utilities.swift */,
+				DEB9E74A2C84A01C001C35C5 /* LottieView.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -416,6 +430,7 @@
 				DED345182C6D1A26000988C6 /* Realtime */,
 				DED3451A2C6D1A26000988C6 /* Storage */,
 				DEC03DF02C6D2832004728BA /* Supabase */,
+				DEB9E7452C849F4D001C35C5 /* Lottie */,
 			);
 			productName = FocusFlow;
 			productReference = DE93D50B2C6A888600B7E7A2 /* FocusFlow.app */;
@@ -491,6 +506,7 @@
 			mainGroup = DE93D5022C6A888600B7E7A2;
 			packageReferences = (
 				DED345112C6D1A26000988C6 /* XCRemoteSwiftPackageReference "supabase-swift" */,
+				DEB9E7442C849F4D001C35C5 /* XCRemoteSwiftPackageReference "lottie-spm" */,
 			);
 			productRefGroup = DE93D50C2C6A888600B7E7A2 /* Products */;
 			projectDirPath = "";
@@ -512,6 +528,7 @@
 				DEC03E412C6FEC7C004728BA /* Poppins-SemiBold.ttf in Resources */,
 				DEC03E3F2C6FEC7C004728BA /* Poppins-ExtraBold.ttf in Resources */,
 				DEC03E382C6FEC44004728BA /* Poppins-Bold.ttf in Resources */,
+				DEB9E74D2C84A090001C35C5 /* OfflineAnimation.json in Resources */,
 				DEC03E4A2C709E07004728BA /* Poppins-ExtraLight.ttf in Resources */,
 				DEC03E402C6FEC7C004728BA /* Poppins-Medium.ttf in Resources */,
 				DE93D5132C6A888700B7E7A2 /* Assets.xcassets in Resources */,
@@ -540,6 +557,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB9E74B2C84A01C001C35C5 /* LottieView.swift in Sources */,
 				DE97207B2C70CEEF00EC2F81 /* Extensions.swift in Sources */,
 				DE9720772C70AFFE00EC2F81 /* SettingsView.swift in Sources */,
 				DEC03E1D2C6F4BEF004728BA /* ToDoView.swift in Sources */,
@@ -550,11 +568,13 @@
 				DEC03E2A2C6F9097004728BA /* CreateTodoView.swift in Sources */,
 				DEC03DEC2C6D26C8004728BA /* SignInView.swift in Sources */,
 				DEC03E222C6F51C1004728BA /* TableManager.swift in Sources */,
+				DEB9E7482C849F97001C35C5 /* OfflineView.swift in Sources */,
 				DEC03E462C707223004728BA /* DayBriefCardView.swift in Sources */,
 				DE97207F2C73B5D000EC2F81 /* PriorityListView.swift in Sources */,
 				DEC03DEE2C6D27A8004728BA /* AuthManager.swift in Sources */,
 				DEC03DFB2C6E0D8A004728BA /* SignInViewModel.swift in Sources */,
 				DEC03E482C7077E3004728BA /* BriefCardViewModel.swift in Sources */,
+				DEB9E7412C848E7A001C35C5 /* Utilities.swift in Sources */,
 				DE93D5112C6A888600B7E7A2 /* OnboardingView.swift in Sources */,
 				DE97207D2C71FF1F00EC2F81 /* TaskView.swift in Sources */,
 				DEC03E202C6F50BE004728BA /* DatabaseManager.swift in Sources */,
@@ -913,6 +933,14 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		DEB9E7442C849F4D001C35C5 /* XCRemoteSwiftPackageReference "lottie-spm" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/airbnb/lottie-spm.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.5.0;
+			};
+		};
 		DED345112C6D1A26000988C6 /* XCRemoteSwiftPackageReference "supabase-swift" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/supabase-community/supabase-swift.git";
@@ -924,6 +952,11 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		DEB9E7452C849F4D001C35C5 /* Lottie */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DEB9E7442C849F4D001C35C5 /* XCRemoteSwiftPackageReference "lottie-spm" */;
+			productName = Lottie;
+		};
 		DEC03DF02C6D2832004728BA /* Supabase */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = DED345112C6D1A26000988C6 /* XCRemoteSwiftPackageReference "supabase-swift" */;

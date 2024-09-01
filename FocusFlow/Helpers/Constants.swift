@@ -9,7 +9,6 @@ import Foundation
 import SwiftUI
 
 //MARK: - Constants
-
 struct URLS {
     static let baseURL = "https://fqtpyipffielhhpurwmw.supabase.co"
     static let authKey = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZxdHB5aXBmZmllbGhocHVyd213Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MjM2NTYxODQsImV4cCI6MjAzOTIzMjE4NH0.aF48FZM2OM_zFcRVfCkShHELbg5i2dNRAgc7ZJMH4ws"
@@ -17,7 +16,6 @@ struct URLS {
 }
 
 //MARK: - AppSpacers
-
 /// A collection of standard spacer values used for consistent spacing throughout the app.
 ///
 /// This struct defines common spacer sizes to ensure uniform spacing in the user interface.
@@ -59,7 +57,6 @@ struct AppSpacers {
 }
 
 //MARK: - AppIconSize
-
 /// A struct that defines standard sizes for app icons.
 ///
 /// `AppIconSize` provides a set of predefined icon sizes used throughout the app. These sizes
@@ -86,7 +83,6 @@ struct AppIconSize {
 }
 
 // MARK: - AppCornerCurves
-
 /// A struct that defines standard corner radius values for rounded corners throughout the app.
 ///
 /// `AppCornerCurves` provides a set of predefined corner radius sizes that can be used across
@@ -106,7 +102,6 @@ struct AppCornerCurves {
 }
 
 //MARK: - AppComponentSize
-
 /// A struct that defines standard sizes for various UI components in the app.
 ///
 /// `AppComponentSize` provides a set of predefined dimensions used for different components,
@@ -127,7 +122,6 @@ struct AppComponentSize {
 }
 
 //MARK: - AppColors
-
 /// A collection of color values used for consistent theming throughout the app.
 ///
 /// This struct defines and centralizes the color values used across various UI elements
