@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct FocusFlowApp: App {
+    @StateObject private var reachability = Reachability()
+    
     var body: some Scene {
         WindowGroup {
             OnboardingView()
+                .environmentObject(reachability)
         }
     }
 }
