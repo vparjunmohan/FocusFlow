@@ -225,6 +225,14 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
+		DEB9E75C2C84E350001C35C5 /* Animations */ = {
+			isa = PBXGroup;
+			children = (
+				DEB9E74C2C84A090001C35C5 /* OfflineAnimation.json */,
+			);
+			path = Animations;
+			sourceTree = "<group>";
+		};
 		DEC03DEF2C6D2832004728BA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -339,7 +347,7 @@
 		DEC03E352C6FEC15004728BA /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				DEB9E74C2C84A090001C35C5 /* OfflineAnimation.json */,
+				DEB9E75C2C84E350001C35C5 /* Animations */,
 				DEC03DF22C6D28A6004728BA /* Constants.swift */,
 				DEC03E432C6FEDBC004728BA /* FontHelper.swift */,
 				DE97207A2C70CEEF00EC2F81 /* Extensions.swift */,

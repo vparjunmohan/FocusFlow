@@ -27,7 +27,7 @@ struct CreateTodoView: View {
     
     var body: some View {
         ZStack {
-            AppColors.appBgColor.ignoresSafeArea()
+            AppColors.surfacePrimary.ignoresSafeArea()
             VStack(alignment: .leading, spacing: 0) {
                 todoTitleField
                 
@@ -81,7 +81,7 @@ struct CreateTodoView: View {
         ZStack(alignment: .topLeading) {
             TextEditor(text: $todoDescription)
                 .font(FontHelper.applyFont(forTextStyle: .body, weight: .regular))
-                .colorMultiply(AppColors.appBgColor)
+                .colorMultiply(AppColors.surfacePrimary)
                 .padding(.horizontal, AppSpacers.large)
             
             if todoDescription.isEmpty {
@@ -117,12 +117,12 @@ struct CreateTodoView: View {
                 )
                 .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             }
-            .foregroundStyle(createTodoViewModel.selectedPriority.priorityColor ?? AppColors.labelColor)
+            .foregroundStyle(createTodoViewModel.selectedPriority.priorityColor ?? AppColors.textTertiary)
             .padding(.horizontal, AppSpacers.medium)
             .padding(.vertical, AppSpacers.small)
             .background(
                 RoundedRectangle(cornerRadius: AppCornerCurves.xsmall)
-                    .stroke(AppColors.stokeColor, lineWidth: 1)
+                    .stroke(AppColors.stokePrimary, lineWidth: 1)
             )
         }
         .padding(.leading, AppSpacers.large)
@@ -141,7 +141,7 @@ struct CreateTodoView: View {
     /// - Top padding is applied using `AppSpacers.medium`.
     var divider: some View {
         Rectangle()
-            .fill(AppColors.stokeColor)
+            .fill(AppColors.stokePrimary)
             .frame(height: 1)
             .frame(maxWidth: .infinity)
             .padding(.top, AppSpacers.medium)

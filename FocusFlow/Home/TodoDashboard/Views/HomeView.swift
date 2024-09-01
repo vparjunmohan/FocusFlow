@@ -52,7 +52,7 @@ struct HomeView: View {
     /// visible area. This creates a seamless background that fills the screen,
     /// regardless of the device's status bar, notch, or other UI elements.
     var backgroundView: some View {
-        AppColors.appBgColor
+        AppColors.surfacePrimary
             .ignoresSafeArea()
     }
     
@@ -94,7 +94,7 @@ struct HomeView: View {
                 .foregroundStyle(AppColors.themeColor)
                 .background(
                     Circle()
-                        .fill(AppColors.appBgColor)
+                        .fill(AppColors.surfacePrimary)
                         .frame(width: AppIconSize.xxlarge, height: AppIconSize.xxlarge)
                 )
         }
