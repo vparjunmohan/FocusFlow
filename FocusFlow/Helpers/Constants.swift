@@ -8,8 +8,6 @@
 import Foundation
 import SwiftUI
 
-
-
 //MARK: - Constants
 struct URLS {
     static let baseURL = "https://fqtpyipffielhhpurwmw.supabase.co"
