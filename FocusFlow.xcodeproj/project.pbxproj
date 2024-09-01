@@ -25,6 +25,12 @@
 		DEB9E7482C849F97001C35C5 /* OfflineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9E7472C849F97001C35C5 /* OfflineView.swift */; };
 		DEB9E74B2C84A01C001C35C5 /* LottieView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEB9E74A2C84A01C001C35C5 /* LottieView.swift */; };
 		DEB9E74D2C84A090001C35C5 /* OfflineAnimation.json in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E74C2C84A090001C35C5 /* OfflineAnimation.json */; };
+		DEB9E74F2C84DBBD001C35C5 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E74E2C84DBBD001C35C5 /* OpenSans-Light.ttf */; };
+		DEB9E7552C84DBFD001C35C5 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E7502C84DBFD001C35C5 /* OpenSans-Bold.ttf */; };
+		DEB9E7562C84DBFD001C35C5 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E7512C84DBFD001C35C5 /* OpenSans-Regular.ttf */; };
+		DEB9E7572C84DBFD001C35C5 /* OpenSans-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E7522C84DBFD001C35C5 /* OpenSans-SemiBold.ttf */; };
+		DEB9E7582C84DBFD001C35C5 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E7532C84DBFD001C35C5 /* OpenSans-ExtraBold.ttf */; };
+		DEB9E7592C84DBFD001C35C5 /* OpenSans-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEB9E7542C84DBFD001C35C5 /* OpenSans-Medium.ttf */; };
 		DEC03DEC2C6D26C8004728BA /* SignInView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03DEB2C6D26C8004728BA /* SignInView.swift */; };
 		DEC03DEE2C6D27A8004728BA /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03DED2C6D27A8004728BA /* AuthManager.swift */; };
 		DEC03DF12C6D2832004728BA /* Supabase in Frameworks */ = {isa = PBXBuildFile; productRef = DEC03DF02C6D2832004728BA /* Supabase */; };
@@ -40,15 +46,9 @@
 		DEC03E262C6F5D30004728BA /* Todos.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E252C6F5D30004728BA /* Todos.swift */; };
 		DEC03E282C6F5D6A004728BA /* ToDoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */; };
 		DEC03E2A2C6F9097004728BA /* CreateTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E292C6F9097004728BA /* CreateTodoView.swift */; };
-		DEC03E382C6FEC44004728BA /* Poppins-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E372C6FEC43004728BA /* Poppins-Bold.ttf */; };
-		DEC03E3E2C6FEC7C004728BA /* Poppins-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3A2C6FEC7C004728BA /* Poppins-Regular.ttf */; };
-		DEC03E3F2C6FEC7C004728BA /* Poppins-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3B2C6FEC7C004728BA /* Poppins-ExtraBold.ttf */; };
-		DEC03E402C6FEC7C004728BA /* Poppins-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */; };
-		DEC03E412C6FEC7C004728BA /* Poppins-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */; };
 		DEC03E442C6FEDBC004728BA /* FontHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E432C6FEDBC004728BA /* FontHelper.swift */; };
 		DEC03E462C707223004728BA /* DayBriefCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E452C707223004728BA /* DayBriefCardView.swift */; };
 		DEC03E482C7077E3004728BA /* BriefCardViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC03E472C7077E3004728BA /* BriefCardViewModel.swift */; };
-		DEC03E4A2C709E07004728BA /* Poppins-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = DEC03E492C709E07004728BA /* Poppins-ExtraLight.ttf */; };
 		DEC679582C7A559D00A12B70 /* CreateTodoViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DEC679572C7A559D00A12B70 /* CreateTodoViewModel.swift */; };
 		DED345132C6D1A26000988C6 /* Auth in Frameworks */ = {isa = PBXBuildFile; productRef = DED345122C6D1A26000988C6 /* Auth */; };
 		DED345152C6D1A26000988C6 /* Functions in Frameworks */ = {isa = PBXBuildFile; productRef = DED345142C6D1A26000988C6 /* Functions */; };
@@ -95,6 +95,12 @@
 		DEB9E7472C849F97001C35C5 /* OfflineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfflineView.swift; sourceTree = "<group>"; };
 		DEB9E74A2C84A01C001C35C5 /* LottieView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LottieView.swift; sourceTree = "<group>"; };
 		DEB9E74C2C84A090001C35C5 /* OfflineAnimation.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = OfflineAnimation.json; sourceTree = "<group>"; };
+		DEB9E74E2C84DBBD001C35C5 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		DEB9E7502C84DBFD001C35C5 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		DEB9E7512C84DBFD001C35C5 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		DEB9E7522C84DBFD001C35C5 /* OpenSans-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiBold.ttf"; sourceTree = "<group>"; };
+		DEB9E7532C84DBFD001C35C5 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		DEB9E7542C84DBFD001C35C5 /* OpenSans-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Medium.ttf"; sourceTree = "<group>"; };
 		DEC03DEB2C6D26C8004728BA /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		DEC03DED2C6D27A8004728BA /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
 		DEC03DF22C6D28A6004728BA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -110,16 +116,10 @@
 		DEC03E252C6F5D30004728BA /* Todos.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todos.swift; sourceTree = "<group>"; };
 		DEC03E272C6F5D6A004728BA /* ToDoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ToDoViewModel.swift; sourceTree = "<group>"; };
 		DEC03E292C6F9097004728BA /* CreateTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoView.swift; sourceTree = "<group>"; };
-		DEC03E372C6FEC43004728BA /* Poppins-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Bold.ttf"; sourceTree = "<group>"; };
-		DEC03E3A2C6FEC7C004728BA /* Poppins-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Regular.ttf"; sourceTree = "<group>"; };
-		DEC03E3B2C6FEC7C004728BA /* Poppins-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraBold.ttf"; sourceTree = "<group>"; };
-		DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-Medium.ttf"; sourceTree = "<group>"; };
-		DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-SemiBold.ttf"; sourceTree = "<group>"; };
 		DEC03E422C6FEC8D004728BA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		DEC03E432C6FEDBC004728BA /* FontHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontHelper.swift; sourceTree = "<group>"; };
 		DEC03E452C707223004728BA /* DayBriefCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DayBriefCardView.swift; sourceTree = "<group>"; };
 		DEC03E472C7077E3004728BA /* BriefCardViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BriefCardViewModel.swift; sourceTree = "<group>"; };
-		DEC03E492C709E07004728BA /* Poppins-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Poppins-ExtraLight.ttf"; sourceTree = "<group>"; };
 		DEC679572C7A559D00A12B70 /* CreateTodoViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateTodoViewModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -352,12 +352,12 @@
 		DEC03E362C6FEC27004728BA /* Fonts */ = {
 			isa = PBXGroup;
 			children = (
-				DEC03E492C709E07004728BA /* Poppins-ExtraLight.ttf */,
-				DEC03E3B2C6FEC7C004728BA /* Poppins-ExtraBold.ttf */,
-				DEC03E3C2C6FEC7C004728BA /* Poppins-Medium.ttf */,
-				DEC03E3A2C6FEC7C004728BA /* Poppins-Regular.ttf */,
-				DEC03E3D2C6FEC7C004728BA /* Poppins-SemiBold.ttf */,
-				DEC03E372C6FEC43004728BA /* Poppins-Bold.ttf */,
+				DEB9E7502C84DBFD001C35C5 /* OpenSans-Bold.ttf */,
+				DEB9E7532C84DBFD001C35C5 /* OpenSans-ExtraBold.ttf */,
+				DEB9E7542C84DBFD001C35C5 /* OpenSans-Medium.ttf */,
+				DEB9E7512C84DBFD001C35C5 /* OpenSans-Regular.ttf */,
+				DEB9E7522C84DBFD001C35C5 /* OpenSans-SemiBold.ttf */,
+				DEB9E74E2C84DBBD001C35C5 /* OpenSans-Light.ttf */,
 			);
 			path = Fonts;
 			sourceTree = "<group>";
@@ -524,15 +524,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DEB9E7552C84DBFD001C35C5 /* OpenSans-Bold.ttf in Resources */,
 				DE93D5162C6A888700B7E7A2 /* Preview Assets.xcassets in Resources */,
-				DEC03E412C6FEC7C004728BA /* Poppins-SemiBold.ttf in Resources */,
-				DEC03E3F2C6FEC7C004728BA /* Poppins-ExtraBold.ttf in Resources */,
-				DEC03E382C6FEC44004728BA /* Poppins-Bold.ttf in Resources */,
+				DEB9E7592C84DBFD001C35C5 /* OpenSans-Medium.ttf in Resources */,
 				DEB9E74D2C84A090001C35C5 /* OfflineAnimation.json in Resources */,
-				DEC03E4A2C709E07004728BA /* Poppins-ExtraLight.ttf in Resources */,
-				DEC03E402C6FEC7C004728BA /* Poppins-Medium.ttf in Resources */,
+				DEB9E7572C84DBFD001C35C5 /* OpenSans-SemiBold.ttf in Resources */,
+				DEB9E7582C84DBFD001C35C5 /* OpenSans-ExtraBold.ttf in Resources */,
 				DE93D5132C6A888700B7E7A2 /* Assets.xcassets in Resources */,
-				DEC03E3E2C6FEC7C004728BA /* Poppins-Regular.ttf in Resources */,
+				DEB9E74F2C84DBBD001C35C5 /* OpenSans-Light.ttf in Resources */,
+				DEB9E7562C84DBFD001C35C5 /* OpenSans-Regular.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

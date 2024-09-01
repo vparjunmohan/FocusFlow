@@ -44,17 +44,17 @@ struct FontHelper {
         var fontName: String {
             switch self {
             case .extraLight:
-                return "Poppins-ExtraLight"
+                return "OpenSans-Light"
             case .regular:
-                return "Poppins-Regular"
+                return "OpenSans-Regular"
             case .medium:
-                return "Poppins-Medium"
+                return "OpenSans-Medium"
             case .semiBold:
-                return "Poppins-SemiBold"
+                return "OpenSans-SemiBold"
             case .bold:
-                return "Poppins-Bold"
+                return "OpenSans-Bold"
             case .extraBold:
-                return "Poppins-ExtraBold"
+                return "OpenSans-ExtraBold"
             }
         }
     }

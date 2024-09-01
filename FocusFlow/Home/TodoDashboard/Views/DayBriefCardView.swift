@@ -45,7 +45,7 @@ struct DayBriefCardView: View {
     var dateColumn: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Today")
-                .font(FontHelper.applyFont(forTextStyle: .title, weight: .medium))
+                .font(FontHelper.applyFont(forTextStyle: .title, weight: .extraBold))
             Spacer()
             Text(viewModel.currentWeekday)
                 .font(FontHelper.applyFont(forTextStyle: .headline, weight: .regular))
