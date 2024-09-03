@@ -72,14 +72,14 @@ struct ToDoView: View {
     /// Determines the number of shimmer items to display while loading.
     ///
     /// This computed property calculates the number of shimmer items to show based on the current
-    /// number of todo items, with a minimum of 5 and a maximum of 10. This approach ensures that:
+    /// number of todo items, with a minimum of 7 and a maximum of 10. This approach ensures that:
     /// 1. There's always a reasonable number of shimmer items visible during loading.
     /// 2. The number of shimmer items roughly matches the expected number of actual items.
     /// 3. We don't overload the view with too many shimmer items on larger lists.
     ///
     /// - Returns: An integer between 5 and 10, inclusive.
     private var numberOfShimmerItems: Int {
-        min(10, max(5, viewModel.todoList.count))
+        min(10, max(7, viewModel.todoList.count))
     }
     
     // MARK: - Actions
