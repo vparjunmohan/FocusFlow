@@ -11,18 +11,22 @@ import Foundation
 ///
 /// The `ToDoViewModel` class conforms to the `ObservableObject` protocol, enabling
 /// SwiftUI views to automatically update whenever the published properties change.
-/// This class manages the creation and retrieval of to-do items.
+/// This class manages the creation, retrieval, and loading state of to-do items.
 ///
-/// - Properties:
-///   - `createNewTodo`: An array of ``TodoPayload`` used to hold new to-do items
-///     that are being created. This array is published, so any changes to it
-///     will trigger a UI update.
-///   - `todoList`: An array of ``Todos`` representing the list of to-do items
-///     fetched from the data source. This is also a published property, ensuring
-///     the UI updates when the list of to-dos changes.
+/// Properties:
+/// - `createNewTodo`: An array of `TodoPayload` used to hold new to-do items
+///   that are being created. This array is published, so any changes to it
+///   will trigger a UI update.
+/// - `todoList`: An array of `Todos` representing the list of to-do items
+///   fetched from the data source. This is also a published property, ensuring
+///   the UI updates when the list of to-dos changes.
+/// - `isLoading`: A Boolean flag indicating whether the to-do list is currently
+///   being fetched or updated. This allows the UI to show loading indicators
+///   or shimmer effects when appropriate.
 class ToDoViewModel: ObservableObject {
     @Published var createNewTodo: [TodoPayload] = [TodoPayload]()
     @Published var todoList: [Todos] = []
+    @Published var isLoading: Bool = false
         
     /// Asynchronously creates a new to-do item and saves it to the database.
     ///
@@ -48,18 +52,22 @@ class ToDoViewModel: ObservableObject {
     /// Asynchronously fetches the list of to-do items for a specific user and updates the `todoList`.
     ///
     /// The `fetchItems` function retrieves the to-do items from the database associated with the provided user UID.
-    /// If the fetch operation succeeds, the `todoList` is updated with the fetched items. If an error occurs,
-    /// it is caught and logged to the console.
+    /// It first sets the `isLoading` state to `true` to indicate that the fetching process has started.
+    /// After the items are successfully fetched, they are assigned to `todoList`, and the `isLoading` state is set to `false`.
+    /// If an error occurs during the fetch operation, it is caught and logged to the console, and the `isLoading` state is set to `false`.
     ///
     /// - Parameter uid: The unique identifier of the user whose to-do items are to be fetched.
     /// - Throws: An error if the to-do items could not be fetched from the database.
     @MainActor
     func fetchItems(uid: String) async throws {
+        isLoading = true
         do {
             todoList = try await DatabaseManager.shared.fetchToDoItems(userUid: uid)
+            
         } catch {
             print("unable to fetch the todo list")
         }
+        isLoading = false 
     }
     
     func deleteItem() async throws {
