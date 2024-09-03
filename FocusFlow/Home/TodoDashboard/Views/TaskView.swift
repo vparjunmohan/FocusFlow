@@ -17,13 +17,6 @@ struct TaskView: View {
     
     var todos: Todos
     
-    /// A horizontal stack displaying a task completion button, task details, and a spacer for layout.
-    ///
-    /// This view arranges the task's elements in a horizontal line with a large spacing between them.
-    /// It includes a button to mark the task as completed, the task details (title, date, and priority),
-    /// and a spacer to push the elements to the left, ensuring a balanced layout. The entire stack is
-    /// padded uniformly and contained within a rounded rectangle with a background color, giving it
-    /// a card-like appearance. The height is fixed at 70 points to maintain a consistent visual style.
     var body: some View {
         HStack(spacing: AppSpacers.large) {
             
@@ -46,7 +39,7 @@ struct TaskView: View {
     /// to mark the task as complete. It uses a resizable system image (a circle) to visually
     /// indicate the completion state. The button's size is defined by the `AppIconSize.medium`
     /// to ensure consistency with other UI elements.
-    var taskCompletionButton: some View {
+    private var taskCompletionButton: some View {
         Button(action: {
             // Action for task completion
         }) {
@@ -74,7 +67,7 @@ struct TaskView: View {
     ///
     /// - Parameters:
     ///   - `todos`: The model object containing the task details.
-    var taskDetails: some View {
+    private var taskDetails: some View {
         VStack(alignment: .leading, spacing: AppSpacers.xsmall) {
             Text(todos.task)
                 .font(FontHelper.applyFont(forTextStyle: .headline, weight: .regular))
@@ -102,6 +95,7 @@ struct TaskView: View {
         }
     }
     
+    // MARK: - Helpers
     /// Returns the appropriate color for a given to-do item's priority.
     ///
     /// The `updateTaskPriority` function maps the `priority` string of a `Todos` object to a specific color.
@@ -109,7 +103,7 @@ struct TaskView: View {
     ///
     /// - Parameter todo: A `Todos` object containing the priority information.
     /// - Returns: A `Color` corresponding to the task's priority. If the priority doesn't match any predefined values, `Color.clear` is returned.
-    func updateTaskPriority(todo: Todos) -> Color {
+    private func updateTaskPriority(todo: Todos) -> Color {
         switch todo.priority {
         case "Priority 1":
             return AppColors.priority1
@@ -128,7 +122,7 @@ struct TaskView: View {
     /// - Parameter todo: A `Todos` object containing the priority information.
     /// - Returns: A string representing the shorthand priority level ("P1", "P2", "P3", "P4"),
     ///            or an empty string if the priority does not match any predefined levels.
-    func getPriority(todo: Todos) -> String {
+    private func getPriority(todo: Todos) -> String {
         switch todo.priority {
         case "Priority 1":
             return "P1"
@@ -152,7 +146,7 @@ struct TaskView: View {
     ///
     /// - Parameter timestamp: An integer representing the Unix timestamp in seconds.
     /// - Returns: A formatted date string ("dd-MM") if the timestamp is valid, or an empty string if invalid.
-    func getDueDate(timestamp: Int) -> String {
+    private func getDueDate(timestamp: Int) -> String {
         if timestamp > 0 {
             let date = Date(timeIntervalSince1970: TimeInterval(timestamp))
 
@@ -166,7 +160,6 @@ struct TaskView: View {
         }
     }
 }
-
 
 #Preview {
     TaskView(todos: .init(id: 1, createdAt: "12/8", task: "Task 1", taskDescription: "userid", priority: "", userUID: "priority 1", duedate: 123432))

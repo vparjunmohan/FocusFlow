@@ -42,10 +42,10 @@ struct DayBriefCardView: View {
     ///
     /// The `VStack` is aligned to the leading edge and has no spacing between its elements.
     /// The entire stack has padding on the leading edge to separate it from adjacent content.
-    var dateColumn: some View {
+    private var dateColumn: some View {
         VStack(alignment: .leading, spacing: 0) {
             Text("Today")
-                .font(FontHelper.applyFont(forTextStyle: .title, weight: .medium))
+                .font(FontHelper.applyFont(forTextStyle: .title, weight: .extraBold))
             Spacer()
             Text(viewModel.currentWeekday)
                 .font(FontHelper.applyFont(forTextStyle: .headline, weight: .regular))
@@ -63,7 +63,7 @@ struct DayBriefCardView: View {
     /// - A `Spacer` to push the content to the top of the `VStack`.
     ///
     /// The `VStack` has padding at the top and trailing edges to provide spacing from adjacent content and the edges of the parent view.
-    var messageColumn: some View {
+    private var messageColumn: some View {
         VStack {
             Text("Progress begins with a single step. What will you do today to make your week count?")
                 .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .regular))
@@ -82,7 +82,7 @@ struct DayBriefCardView: View {
     /// - Padding is applied horizontally using `AppSpacers.large` to provide spacing between the card and adjacent content.
     ///
     /// This background provides a visually appealing container for the content of the card.
-    var cardBackground: some View {
+    private var cardBackground: some View {
         RoundedRectangle(cornerRadius: AppCornerCurves.large)
             .fill(AppColors.cardColor)
             .padding(.horizontal, AppSpacers.large)

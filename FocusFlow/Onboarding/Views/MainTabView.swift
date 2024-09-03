@@ -48,6 +48,21 @@ struct MainTabView: View {
         }
     }
     
+    // MARK: - Subviews
+    /// The view displayed when there is an active network connection.
+    ///
+    /// This view provides a tabbed interface using `TabView`, allowing users to switch between different
+    /// sections of the app, such as Home and Settings.
+    ///
+    /// - `TabView` manages the selection of tabs using the `selectedTab` state variable.
+    /// - The `HomeView` and `SettingsView` are provided as tabs, each represented with a label and an
+    ///   icon that visually indicates the currently selected tab.
+    /// - The `Label` for each tab uses conditional logic to show a filled or outlined icon based on the
+    ///   current `selectedTab` index.
+    /// - `AppColors.themeColor` is applied as the tint color for the tab bar items, ensuring consistency
+    ///   with the app's theme.
+    /// - `configureTabViewBackground` is used to set the background color of the `TabView` to `AppColors.surfacePrimary`,
+    ///   providing a unified look and feel across the app.
     private var connectedView: some View {
         TabView(selection: $selectedTab) {
             HomeView(authVM: authViewModel)
@@ -63,7 +78,7 @@ struct MainTabView: View {
                 .tag(1)
         }
         .tint(AppColors.themeColor)
-        .configureTabViewBackground(AppColors.cardColor)
+        .configureTabViewBackground(AppColors.surfacePrimary)
     }
 }
 

@@ -27,7 +27,7 @@ struct CreateTodoView: View {
     
     var body: some View {
         ZStack {
-            AppColors.appBgColor.ignoresSafeArea()
+            AppColors.surfacePrimary.ignoresSafeArea()
             VStack(alignment: .leading, spacing: 0) {
                 todoTitleField
                 
@@ -59,7 +59,7 @@ struct CreateTodoView: View {
     /// with a semi-bold title3 font and has horizontal and top padding to provide adequate
     /// spacing around the field. The text entered by the user is bound to the `todoTitle`
     /// state variable, ensuring that changes are reflected in real-time.
-    var todoTitleField: some View {
+    private var todoTitleField: some View {
         TextField(titlePlaceholder, text: $todoTitle)
             .focused($isTodoTitleFocused)
             .font(FontHelper.applyFont(forTextStyle: .title3, weight: .semiBold))
@@ -77,11 +77,11 @@ struct CreateTodoView: View {
     /// to enter. The placeholder text is styled with a gray color and is positioned slightly
     /// offset from the editor's edges. The placeholder does not intercept user interactions
     /// due to `allowsHitTesting(false)`.
-    var todoDescriptionEditor: some View {
+    private var todoDescriptionEditor: some View {
         ZStack(alignment: .topLeading) {
             TextEditor(text: $todoDescription)
                 .font(FontHelper.applyFont(forTextStyle: .body, weight: .regular))
-                .colorMultiply(AppColors.appBgColor)
+                .colorMultiply(AppColors.surfacePrimary)
                 .padding(.horizontal, AppSpacers.large)
             
             if todoDescription.isEmpty {
@@ -104,7 +104,7 @@ struct CreateTodoView: View {
     ///   The text and icon are styled with a custom font and the selected priority's color. If no color is set, a default label color is used.
     ///   The button has padding, a rounded rectangle background with a stroked border, and is positioned with additional leading padding.
     /// - Layout: The button is constrained to a specific height and internally padded horizontally and vertically for a balanced layout.
-    var priorityButton: some View {
+    private var priorityButton: some View {
         Button {
             withAnimation(.easeInOut(duration: 0.3)) {
                 showPicker.toggle()
@@ -117,12 +117,12 @@ struct CreateTodoView: View {
                 )
                 .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             }
-            .foregroundStyle(createTodoViewModel.selectedPriority.priorityColor ?? AppColors.labelColor)
+            .foregroundStyle(createTodoViewModel.selectedPriority.priorityColor ?? AppColors.textTertiary)
             .padding(.horizontal, AppSpacers.medium)
             .padding(.vertical, AppSpacers.small)
             .background(
                 RoundedRectangle(cornerRadius: AppCornerCurves.xsmall)
-                    .stroke(AppColors.stokeColor, lineWidth: 1)
+                    .stroke(AppColors.stokePrimary, lineWidth: 1)
             )
         }
         .padding(.leading, AppSpacers.large)
@@ -139,9 +139,9 @@ struct CreateTodoView: View {
     /// - The height is fixed to 1 point.
     /// - The width is set to span the entire available width (`maxWidth`).
     /// - Top padding is applied using `AppSpacers.medium`.
-    var divider: some View {
+    private var divider: some View {
         Rectangle()
-            .fill(AppColors.stokeColor)
+            .fill(AppColors.stokePrimary)
             .frame(height: 1)
             .frame(maxWidth: .infinity)
             .padding(.top, AppSpacers.medium)
@@ -156,7 +156,7 @@ struct CreateTodoView: View {
     ///
     /// The button's action is linked to the `submitTodo` method, which handles the logic
     /// for saving or processing the new to-do item.
-    var submitButton: some View {
+    private var submitButton: some View {
         HStack {
             Spacer()
             Button(action: submitTodo, label: {
@@ -202,7 +202,7 @@ struct CreateTodoView: View {
     ///
     /// - Note: The function assumes that the `AppUserViewModel` and `ToDoViewModel` are properly initialized and contain
     ///         valid data required for creating and fetching to-do items.
-    func submitTodo() {
+    private func submitTodo() {
         Task {
             do {
                 try await todoViewModel.createItem(text: todoTitle, description: todoDescription, userUID: appUserViewModel.appUser?.id ?? "", priority: createTodoViewModel.selectedPriority.name ?? "", duedate: Int(Date().timeIntervalSince1970))

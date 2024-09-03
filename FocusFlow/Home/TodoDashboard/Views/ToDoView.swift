@@ -31,7 +31,7 @@ struct ToDoView: View {
     /// showing the task description. The `ForEach` loop ensures that each to-do item is
     /// uniquely identified by its `id`, allowing SwiftUI to handle updates and re-rendering
     /// efficiently as the list changes.
-    var todoListView: some View {
+    private var todoListView: some View {
         LazyVStack(spacing: AppSpacers.medium) {
             ForEach(viewModel.todoList, id: \.id) { todo in
                 TaskView(todos: todo)
@@ -51,7 +51,7 @@ struct ToDoView: View {
     ///
     /// This function is typically called when the view appears to ensure that the latest to-do
     /// items are loaded and displayed.
-    func fetchToDoItems() {
+    private func fetchToDoItems() {
         Task {
             do {
                 try await viewModel.fetchItems(uid: appUserInfo.appUser?.id ?? "")

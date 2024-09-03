@@ -126,26 +126,31 @@ struct AppComponentSize {
 ///
 /// This struct defines and centralizes the color values used across various UI elements
 /// to maintain a cohesive and unified visual theme. The colors are defined in the app's
-/// asset catalog and are used for backgrounds, text, buttons, and other components.
+/// asset catalog and are applied to backgrounds, text, buttons, and other components.
 ///
-/// - `appBgColor`: The primary background color for the app, providing a consistent base throughout the UI.
-/// - `cardColor`: The background color used for cards and other container views.
-/// - `themeColor`: The primary tint color used across the app, giving prominence to key elements.
-/// - `dangerColor`: The color used to indicate errors, warnings, or critical actions, providing clear visual feedback.
-/// - `stokeColor`: The color used for strokes and borders around components, enhancing separation and emphasis.
-/// - `labelColor`: The default color used for labels that include icons or images, ensuring text visibility and consistency.
-/// - `priority1`: The color associated with "Priority 1" items, providing a visual cue for high-priority tasks.
-/// - `priority2`: The color associated with "Priority 2" items, helping to differentiate between priority levels.
-/// - `priority3`: The color associated with "Priority 3" items, ensuring a clear distinction among task priorities.
-/// - `priority4`: The color associated with "Priority 4" items, maintaining a uniform approach to lower-priority tasks.
+/// - `primary`: The primary color used for key elements, providing a base color for the app's theme.
+/// - `cardColor`: The background color used for cards and other container views, offering a distinct visual separation.
+/// - `themeColor`: The main tint color for the app, used to highlight and emphasize key elements.
+/// - `dangerColor`: The color used to signify errors, warnings, or critical actions, ensuring clear and immediate visual feedback.
+/// - `stokePrimary`: The color used for primary strokes and borders around components, enhancing separation and emphasis.
+/// - `surfacePrimary`: The color used for surfaces, providing a base background color for various UI elements.
+/// - `textPrimary`: The primary color for main text elements, ensuring readability and prominence.
+/// - `textSecondary`: The color for secondary text, providing a visual hierarchy and contrast.
+/// - `textTertiary`: The color for tertiary text elements, used for less prominent information.
+/// - `priority1`: The color for high-priority tasks, offering a strong visual cue for urgent items.
+/// - `priority2`: The color for medium-priority tasks, distinguishing between levels of importance.
+/// - `priority3`: The color for lower-priority tasks, maintaining clear visual differentiation.
+/// - `priority4`: The color for tasks with the lowest priority, ensuring uniformity in task management.
 struct AppColors {
-    static let appBgColor: Color = .appBg
+    static let primary: Color = .appPrimary
     static let cardColor: Color = .appCard
     static let themeColor: Color = .appTheme
-    static let dangerColor: Color = .appDanger
-    static let stokeColor: Color = .appStroke
-    static let labelColor: Color = .appLabel
-    static let textColor: Color = .appText
+    static let dangerColor: Color = .negative
+    static let stokePrimary: Color = .strokePrimary
+    static let surfacePrimary: Color = .surfacePrimary
+    static let textPrimary: Color = .textPrimary
+    static let textSecondary: Color = .textSecondary
+    static let textTertiary: Color = .textTertiary
     static let priority1: Color = .priority1
     static let priority2: Color = .priority2
     static let priority3: Color = .priority3
