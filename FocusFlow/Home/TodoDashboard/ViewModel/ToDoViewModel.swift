@@ -63,7 +63,6 @@ class ToDoViewModel: ObservableObject {
         isLoading = true
         do {
             todoList = try await DatabaseManager.shared.fetchToDoItems(userUid: uid)
-            
         } catch {
             print("unable to fetch the todo list")
         }

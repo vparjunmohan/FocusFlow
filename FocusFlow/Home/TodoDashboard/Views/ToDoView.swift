@@ -17,9 +17,7 @@ struct ToDoView: View {
     @ObservedObject var appUserInfo: AuthViewModel
     
     var body: some View {
-        ZStack {
-            todoListView
-        }
+        todoListView
         .onAppear(perform: fetchToDoItems)
     }
     
@@ -40,6 +38,7 @@ struct ToDoView: View {
                 loadedContentView
             }
         }
+        .id(viewModel.isLoading)
         .padding(.all, AppSpacers.large)
     }
     
