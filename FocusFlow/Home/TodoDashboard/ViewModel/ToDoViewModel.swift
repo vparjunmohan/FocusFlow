@@ -23,11 +23,16 @@ import Foundation
 /// - `isLoading`: A Boolean flag indicating whether the to-do list is currently
 ///   being fetched or updated. This allows the UI to show loading indicators
 ///   or shimmer effects when appropriate.
+/// - `isDataLoaded`: A Boolean flag indicating whether the to-do list has been
+///   successfully fetched and loaded. This flag helps to avoid unnecessary
+///   re-fetching of data when the view appears multiple times, improving performance
+///   by ensuring that the data is only fetched once unless explicitly reset.
 class ToDoViewModel: ObservableObject {
     @Published var createNewTodo: [TodoPayload] = [TodoPayload]()
     @Published var todoList: [Todos] = []
     @Published var isLoading: Bool = false
-        
+    @Published var isDataLoaded: Bool = false
+    
     /// Asynchronously creates a new to-do item and saves it to the database.
     ///
     /// The `createItem` function constructs a `TodoPayload` object with the provided parameters and
@@ -52,24 +57,44 @@ class ToDoViewModel: ObservableObject {
     /// Asynchronously fetches the list of to-do items for a specific user and updates the `todoList`.
     ///
     /// The `fetchItems` function retrieves the to-do items from the database associated with the provided user UID.
-    /// It first sets the `isLoading` state to `true` to indicate that the fetching process has started.
-    /// After the items are successfully fetched, they are assigned to `todoList`, and the `isLoading` state is set to `false`.
-    /// If an error occurs during the fetch operation, it is caught and logged to the console, and the `isLoading` state is set to `false`.
+    /// It first checks whether the data has already been loaded by evaluating the `isDataLoaded` flag.
+    /// If the data is already loaded, the function returns early to avoid unnecessary re-fetching.
+    /// If the data is not yet loaded, the function proceeds to fetch the items:
+    /// - The `isLoading` state is set to `true` to indicate that the fetching process has started.
+    /// - After the items are successfully fetched, they are assigned to `todoList`, and the `isDataLoaded` flag is set to `true` to prevent future re-fetching unless explicitly reset.
+    /// - If an error occurs during the fetch operation, it is caught and logged to the console, but the UI will reflect that loading has completed by setting `isLoading` to `false`.
     ///
     /// - Parameter uid: The unique identifier of the user whose to-do items are to be fetched.
     /// - Throws: An error if the to-do items could not be fetched from the database.
     @MainActor
     func fetchItems(uid: String) async throws {
+        guard !isDataLoaded else { return } // Skip fetching if data is already loaded
         isLoading = true
         do {
             todoList = try await DatabaseManager.shared.fetchToDoItems(userUid: uid)
+            isDataLoaded = true // Mark data as loaded
         } catch {
             print("unable to fetch the todo list")
         }
-        isLoading = false 
+        isLoading = false
     }
     
     func deleteItem() async throws {
         
+    }
+    
+    /// Resets the to-do data and loading state in the view model.
+    ///
+    /// The `resetData` function clears the currently loaded to-do list and resets the
+    /// `isDataLoaded` flag to `false`. This allows the view model to refetch the data
+    /// the next time `fetchItems` is called. This function is useful when the to-do list
+    /// needs to be refreshed or reloaded, such as after a user logs out or switches accounts.
+    ///
+    /// - The `todoList` is cleared, removing all to-do items from the list.
+    /// - The `isDataLoaded` flag is set to `false`, indicating that the data needs to be
+    ///   reloaded the next time it is requested.
+    func resetData() {
+        isDataLoaded = false
+        todoList = []
     }
 }

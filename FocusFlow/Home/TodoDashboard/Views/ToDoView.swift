@@ -18,7 +18,7 @@ struct ToDoView: View {
     
     var body: some View {
         todoListView
-        .onAppear(perform: fetchToDoItems)
+            .onAppear(perform: fetchToDoItems)
     }
     
     // MARK: - Subviews
