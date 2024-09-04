@@ -38,7 +38,7 @@ struct ToDoView: View {
                 loadedContentView
             }
         }
-        .id(viewModel.isLoading)
+        .id(viewModel.isLoading) // Force view refresh based on loading state
         .padding(.all, AppSpacers.large)
     }
     
