@@ -42,6 +42,7 @@ struct PriorityListView: View {
         .padding(AppSpacers.large)
     }
     
+    // MARK: - Subviews
     /// A view builder function that creates a row for displaying a priority item.
     ///
     /// This function generates a horizontal stack (`HStack`) that includes the priority icon
@@ -56,8 +57,7 @@ struct PriorityListView: View {
     ///   - isLast: A boolean indicating if this is the last priority item in the list.
     ///
     /// - Returns: A view containing the priority icon and information, with an optional separator.
-    @ViewBuilder
-    func priorityRow(for priority: PriorityModel, isLast: Bool) -> some View {
+    private func priorityRow(for priority: PriorityModel, isLast: Bool) -> some View {
         HStack {
             priorityIcon(for: priority)
             priorityInfo(for: priority, showSeparator: !isLast)
@@ -80,7 +80,7 @@ struct PriorityListView: View {
     ///   - priority: The ``PriorityModel`` instance containing the details of the priority item.
     ///
     /// - Returns: An `Image` view styled with the priority color.
-    func priorityIcon(for priority: PriorityModel) -> some View {
+    private func priorityIcon(for priority: PriorityModel) -> some View {
         Image(systemName: "flag.fill")
             .padding(.horizontal, AppSpacers.medium)
             .foregroundStyle(priority.priorityColor ?? .clear)
@@ -97,7 +97,7 @@ struct PriorityListView: View {
     ///   - showSeparator: A boolean indicating if a separator should be displayed.
     ///
     /// - Returns: A `VStack` containing the priority name and, optionally, a separator.
-    func priorityInfo(for priority: PriorityModel, showSeparator: Bool) -> some View {
+    private func priorityInfo(for priority: PriorityModel, showSeparator: Bool) -> some View {
         VStack(alignment: .leading, spacing: AppSpacers.xsmall) {
             Text(priority.name ?? "")
                 .font(FontHelper.applyFont(forTextStyle: .subheadline))
@@ -115,7 +115,7 @@ struct PriorityListView: View {
     /// with a gray color with reduced opacity and has a fixed height and full width.
     ///
     /// - Returns: A `Rectangle` view styled as a separator.
-    var separator: some View {
+    private var separator: some View {
         Rectangle()
             .fill(Color.gray.opacity(0.2))
             .frame(maxWidth: .infinity)

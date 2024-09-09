@@ -29,7 +29,7 @@ class SignInApple: NSObject {
     }
     
     private func startSignInWithAppleFlow(completion: @escaping (Result<SignInAppleResult, Error>) -> Void) {
-        DispatchQueue.main.async { // Ensure UI work is on the main thread
+        DispatchQueue.main.async {
             guard let topVC = UIApplication.getTopViewController() else {
                 completion(.failure(NSError()))
                 return

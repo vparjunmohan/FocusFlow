@@ -38,7 +38,7 @@ struct HomeView: View {
     /// enabling users to drag the sheet to dismiss it. The ``authVM`` is passed as an environment object
     /// to provide necessary authentication data to the `CreateTodoView`. The state binding
     /// `createTodoPresented` controls the visibility of this sheet.
-    var createTodoSheet: some View {
+    private var createTodoSheet: some View {
         CreateTodoView(todoViewModel: todoVM, createTodoPresented: $createTodoPresented)
             .environmentObject(authVM)
             .presentationDetents([.height(200)])
@@ -51,29 +51,32 @@ struct HomeView: View {
     /// beyond the safe area boundaries to ensure the background covers the entire
     /// visible area. This creates a seamless background that fills the screen,
     /// regardless of the device's status bar, notch, or other UI elements.
-    var backgroundView: some View {
-        AppColors.appBgColor
+    private var backgroundView: some View {
+        AppColors.surfacePrimary
             .ignoresSafeArea()
     }
     
     /// The main content view of the Home screen.
     ///
-    /// This view contains a scrollable vertical stack of content. It uses a `ScrollView`
-    /// to allow for vertical scrolling when the content exceeds the screen's height.
-    /// Inside the scroll view, a `LazyVStack` is used to efficiently manage the content,
-    /// loading views lazily as they come into view. The stack currently contains the
-    /// ``DayBriefCardView``, which is styled with top padding and a fixed height.
+    /// This view contains a scrollable vertical stack of content, allowing for a smooth user experience
+    /// when the content exceeds the screen's height. It consists of two main components:
     ///
-    /// Additional content, such as the ``ToDoView``, can be added to this stack to extend
-    /// the functionality of the Home screen.
-    var contentView: some View {
+    /// 1. DayBriefCardView: Provides a summary of the day's activities or schedule.
+    ///    - Styled with top padding for visual separation.
+    ///    - Has a fixed height for consistency across devices.
+    ///
+    /// 2. ToDoView: Displays the user's to-do list or task management interface.
+    ///    - Integrated with ToDoViewModel for task data management.
+    ///    - Uses AuthViewModel for user authentication and personalization.
+    ///
+    /// This structure provides a flexible foundation for the Home screen, allowing for easy
+    /// expansion with additional components or features in the future.
+    private var contentView: some View {
         ScrollView {
-            LazyVStack(spacing: 0) {
-                DayBriefCardView()
-                    .padding(.top, AppSpacers.large)
-                    .frame(height: AppComponentSize.dayBriefCardHeight)
-                 ToDoView(viewModel: todoVM, appUserInfo: authVM)
-            }
+            DayBriefCardView()
+                .padding(.top, AppSpacers.large)
+                .frame(height: AppComponentSize.dayBriefCardHeight)
+             ToDoView(viewModel: todoVM, appUserInfo: authVM)
         }
     }
     
@@ -84,7 +87,7 @@ struct HomeView: View {
     /// The button is styled with a plus-circle icon, resized to the specified dimensions,
     /// and colored using the app's theme color. It is positioned at the bottom-right
     /// of the screen with ample padding around it.
-    var createTodoButton: some View {
+    private var createTodoButton: some View {
         Button {
             createTodoPresented.toggle()
         } label: {
@@ -94,7 +97,7 @@ struct HomeView: View {
                 .foregroundStyle(AppColors.themeColor)
                 .background(
                     Circle()
-                        .fill(AppColors.appBgColor)
+                        .fill(AppColors.surfacePrimary)
                         .frame(width: AppIconSize.xxlarge, height: AppIconSize.xxlarge)
                 )
         }
