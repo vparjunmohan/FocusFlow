@@ -12,8 +12,8 @@ struct DateSelectorView: View {
     @State private var selectedMonth = Calendar.current.component(.month, from: Date())
     @State private var daysInMonth: [Date] = []
     
-    let calendar = Calendar.current
-    let dateFormatter = DateFormatter()
+    private let calendar = Calendar.current
+    private let dateFormatter = DateFormatter()
 
     init() {
         dateFormatter.dateFormat = "dd MMM"
@@ -22,53 +22,64 @@ struct DateSelectorView: View {
     
     var body: some View {
         VStack {
-            // Dropdown for month selection
-            HStack {
-                Text("Your Timeline")
-                    .font(.headline)
-                    .foregroundColor(.white)
-                Spacer()
-                Picker("Month", selection: $selectedMonth) {
-                    ForEach(1...12, id: \.self) { month in
-                        Text(dateFormatter.monthSymbols[month - 1]).tag(month)
-                    }
-                }
-                .pickerStyle(MenuPickerStyle())
-                .onChange(of: selectedMonth, perform: { value in
-                    if let newMonthDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: Date()), month: selectedMonth)) {
-                        updateDaysInMonth(for: newMonthDate)
-                    }
-                })
-            }
-            .padding()
-
-            // Horizontal scrollable date picker
-            ScrollView(.horizontal, showsIndicators: false) {
-                HStack(spacing: 10) {
-                    ForEach(daysInMonth, id: \.self) { date in
-                        let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
-                        VStack {
-                            Text(getDayString(from: date))
-                                .font(.subheadline)
-                                .foregroundColor(.white)
-                            Text(getDateString(from: date))
-                                .font(.headline)
-                                .foregroundColor(isSelected ? .black : .white)
-                                .padding(10)
-                                .background(isSelected ? Color.orange : Color.clear)
-                                .clipShape(RoundedRectangle(cornerRadius: 10))
-                        }
-                        .onTapGesture {
-                            selectedDate = date
-                        }
-                    }
-                }
-                .padding(.horizontal)
-            }
+            monthSelectionView
+            dateScrollView
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear {
             updateDaysInMonth(for: Date())
+        }
+    }
+    
+    private var monthSelectionView: some View {
+        HStack {
+            Text("Your Timeline")
+                .font(.headline)
+                .foregroundColor(.white)
+            Spacer()
+            monthPicker
+        }
+        .padding()
+    }
+    
+    private var monthPicker: some View {
+        Picker("Month", selection: $selectedMonth) {
+            ForEach(1...12, id: \.self) { month in
+                Text(dateFormatter.monthSymbols[month - 1]).tag(month)
+            }
+        }
+        .pickerStyle(MenuPickerStyle())
+        .onChange(of: selectedMonth) { newMonth in
+            updateMonthIfNeeded(newMonth)
+        }
+    }
+    
+    private var dateScrollView: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 10) {
+                ForEach(daysInMonth, id: \.self) { date in
+                    dateSelectionView(for: date)
+                }
+            }
+            .padding(.horizontal)
+        }
+    }
+    
+    private func dateSelectionView(for date: Date) -> some View {
+        let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
+        return VStack {
+            Text(getDayString(from: date))
+                .font(.subheadline)
+                .foregroundColor(.white)
+            Text(getDateString(from: date))
+                .font(.headline)
+                .foregroundColor(isSelected ? .black : .white)
+                .padding(10)
+                .background(isSelected ? Color.orange : Color.clear)
+                .clipShape(RoundedRectangle(cornerRadius: 10))
+        }
+        .onTapGesture {
+            selectedDate = date
         }
     }
     
@@ -84,8 +95,14 @@ struct DateSelectorView: View {
     
     private func updateDaysInMonth(for date: Date) {
         let range = calendar.range(of: .day, in: .month, for: date)!
-        daysInMonth = range.compactMap { day -> Date? in
-            return calendar.date(bySetting: .day, value: day, of: date)
+        daysInMonth = range.compactMap { day in
+            calendar.date(bySetting: .day, value: day, of: date)
+        }
+    }
+    
+    private func updateMonthIfNeeded(_ newMonth: Int) {
+        if let newMonthDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: Date()), month: newMonth)) {
+            updateDaysInMonth(for: newMonthDate)
         }
     }
 }
