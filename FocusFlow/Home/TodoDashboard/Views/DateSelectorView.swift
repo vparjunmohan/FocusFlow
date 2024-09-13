@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DateSelectorView: View {
-    @State private var selectedDate = Date() // Set the current date by default
+    @State private var selectedDate = Date()
     @State private var selectedMonth = Calendar.current.component(.month, from: Date())
     @State private var daysInMonth: [Date] = []
     
@@ -17,7 +17,7 @@ struct DateSelectorView: View {
 
     init() {
         dateFormatter.dateFormat = "dd MMM"
-        updateDaysInMonth(for: Date()) // Update the days for the current month
+        updateDaysInMonth(for: Date())
     }
     
     var body: some View {
@@ -28,7 +28,7 @@ struct DateSelectorView: View {
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear {
             updateDaysInMonth(for: Date())
-            selectedDate = Date() // Ensure the current date is selected on appear
+            selectedDate = Date()
         }
     }
     
@@ -56,13 +56,21 @@ struct DateSelectorView: View {
     }
     
     private var dateScrollView: some View {
-        ScrollView(.horizontal, showsIndicators: false) {
-            HStack(spacing: 10) {
-                ForEach(daysInMonth, id: \.self) { date in
-                    dateSelectionView(for: date)
+        ScrollViewReader { proxy in
+            ScrollView(.horizontal, showsIndicators: false) {
+                HStack(spacing: 10) {
+                    ForEach(daysInMonth, id: \.self) { date in
+                        dateSelectionView(for: date)
+                            .id(date)
+                    }
+                }
+                .padding(.horizontal)
+            }
+            .onAppear {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
+                    self.scrollToCurrentDate(proxy: proxy)
                 }
             }
-            .padding(.horizontal)
         }
     }
     
@@ -104,9 +112,17 @@ struct DateSelectorView: View {
     private func updateMonthIfNeeded(_ newMonth: Int) {
         if let newMonthDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: Date()), month: newMonth)) {
             updateDaysInMonth(for: newMonthDate)
-            // If the selected month is not the current month, update the selectedDate
             if calendar.component(.month, from: selectedDate) != newMonth {
                 selectedDate = newMonthDate
+            }
+        }
+    }
+    
+    private func scrollToCurrentDate(proxy: ScrollViewProxy) {
+        let currentDate = calendar.startOfDay(for: Date())
+        if let dateToScroll = daysInMonth.first(where: { calendar.isDate($0, inSameDayAs: currentDate) }) {
+            withAnimation {
+                proxy.scrollTo(dateToScroll, anchor: .center)
             }
         }
     }
