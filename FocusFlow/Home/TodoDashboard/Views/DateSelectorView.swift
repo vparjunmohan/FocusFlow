@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct DateSelectorView: View {
-    @State private var selectedDate = Date()
+    @State private var selectedDate = Date() // Set the current date by default
     @State private var selectedMonth = Calendar.current.component(.month, from: Date())
     @State private var daysInMonth: [Date] = []
     
@@ -17,7 +17,7 @@ struct DateSelectorView: View {
 
     init() {
         dateFormatter.dateFormat = "dd MMM"
-        updateDaysInMonth(for: Date())
+        updateDaysInMonth(for: Date()) // Update the days for the current month
     }
     
     var body: some View {
@@ -28,6 +28,7 @@ struct DateSelectorView: View {
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear {
             updateDaysInMonth(for: Date())
+            selectedDate = Date() // Ensure the current date is selected on appear
         }
     }
     
@@ -103,9 +104,14 @@ struct DateSelectorView: View {
     private func updateMonthIfNeeded(_ newMonth: Int) {
         if let newMonthDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: Date()), month: newMonth)) {
             updateDaysInMonth(for: newMonthDate)
+            // If the selected month is not the current month, update the selectedDate
+            if calendar.component(.month, from: selectedDate) != newMonth {
+                selectedDate = newMonthDate
+            }
         }
     }
 }
+
 
 #Preview {
     DateSelectorView()
