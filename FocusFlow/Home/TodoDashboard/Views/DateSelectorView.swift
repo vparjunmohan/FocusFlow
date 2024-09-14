@@ -7,18 +7,66 @@
 
 import SwiftUI
 
-struct DateSelectorView: View {
-    @State private var selectedDate = Date()
-    @State private var selectedMonth = Calendar.current.component(.month, from: Date())
-    @State private var daysInMonth: [Date] = []
+// MARK: - ViewModel
+class DateSelectorViewModel: ObservableObject {
+    @Published var selectedDate: Date
+    @Published var selectedMonth: Int
+    @Published var daysInMonth: [Date] = []
     
     private let calendar = Calendar.current
-    private let dateFormatter = DateFormatter()
-
+    let dateFormatter = DateFormatter()
+    
     init() {
-        dateFormatter.dateFormat = "dd MMM"
-        updateDaysInMonth(for: Date())
+        let currentDate = Date()
+        self.selectedDate = currentDate
+        self.selectedMonth = calendar.component(.month, from: currentDate)
+        self.dateFormatter.dateFormat = "dd MMM"
+        self.updateDaysInMonth(for: currentDate)
     }
+    
+    func updateDaysInMonth(for date: Date) {
+        let range = calendar.range(of: .day, in: .month, for: date)!
+        daysInMonth = range.compactMap { day in
+            calendar.date(bySetting: .day, value: day, of: date)
+        }
+    }
+    
+    func updateMonthIfNeeded(_ newMonth: Int) {
+        if let newMonthDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: Date()), month: newMonth)) {
+            updateDaysInMonth(for: newMonthDate)
+            if calendar.component(.month, from: selectedDate) != newMonth {
+                selectedDate = newMonthDate
+            }
+        }
+    }
+    
+    func isDateSelected(_ date: Date) -> Bool {
+        calendar.isDate(date, inSameDayAs: selectedDate)
+    }
+    
+    func getDayString(from date: Date) -> String {
+        let weekday = calendar.component(.weekday, from: date)
+        return dateFormatter.shortWeekdaySymbols[weekday - 1]
+    }
+    
+    func getDateString(from date: Date) -> String {
+        dateFormatter.dateFormat = "d"
+        return dateFormatter.string(from: date)
+    }
+    
+    func scrollToCurrentDate(proxy: ScrollViewProxy) {
+        let currentDate = calendar.startOfDay(for: Date())
+        if let dateToScroll = daysInMonth.first(where: { calendar.isDate($0, inSameDayAs: currentDate) }) {
+            withAnimation {
+                proxy.scrollTo(dateToScroll, anchor: .center)
+            }
+        }
+    }
+}
+
+// MARK: - View
+struct DateSelectorView: View {
+    @StateObject private var viewModel = DateSelectorViewModel()
     
     var body: some View {
         VStack {
@@ -27,8 +75,8 @@ struct DateSelectorView: View {
         }
         .background(Color.black.edgesIgnoringSafeArea(.all))
         .onAppear {
-            updateDaysInMonth(for: Date())
-            selectedDate = Date()
+            viewModel.updateDaysInMonth(for: Date())
+            viewModel.selectedDate = Date()
         }
     }
     
@@ -44,14 +92,14 @@ struct DateSelectorView: View {
     }
     
     private var monthPicker: some View {
-        Picker("Month", selection: $selectedMonth) {
+        Picker("Month", selection: $viewModel.selectedMonth) {
             ForEach(1...12, id: \.self) { month in
-                Text(dateFormatter.monthSymbols[month - 1]).tag(month)
+                Text(viewModel.dateFormatter.monthSymbols[month - 1]).tag(month)
             }
         }
         .pickerStyle(MenuPickerStyle())
-        .onChange(of: selectedMonth) { newMonth in
-            updateMonthIfNeeded(newMonth)
+        .onChange(of: viewModel.selectedMonth) { newMonth in
+            viewModel.updateMonthIfNeeded(newMonth)
         }
     }
     
@@ -59,7 +107,7 @@ struct DateSelectorView: View {
         ScrollViewReader { proxy in
             ScrollView(.horizontal, showsIndicators: false) {
                 HStack(spacing: 10) {
-                    ForEach(daysInMonth, id: \.self) { date in
+                    ForEach(viewModel.daysInMonth, id: \.self) { date in
                         dateSelectionView(for: date)
                             .id(date)
                     }
@@ -68,19 +116,19 @@ struct DateSelectorView: View {
             }
             .onAppear {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    self.scrollToCurrentDate(proxy: proxy)
+                    viewModel.scrollToCurrentDate(proxy: proxy)
                 }
             }
         }
     }
     
     private func dateSelectionView(for date: Date) -> some View {
-        let isSelected = calendar.isDate(date, inSameDayAs: selectedDate)
+        let isSelected = viewModel.isDateSelected(date)
         return VStack {
-            Text(getDayString(from: date))
+            Text(viewModel.getDayString(from: date))
                 .font(.subheadline)
                 .foregroundColor(.white)
-            Text(getDateString(from: date))
+            Text(viewModel.getDateString(from: date))
                 .font(.headline)
                 .foregroundColor(isSelected ? .black : .white)
                 .padding(10)
@@ -88,42 +136,7 @@ struct DateSelectorView: View {
                 .clipShape(RoundedRectangle(cornerRadius: 10))
         }
         .onTapGesture {
-            selectedDate = date
-        }
-    }
-    
-    private func getDayString(from date: Date) -> String {
-        let weekday = calendar.component(.weekday, from: date)
-        return dateFormatter.shortWeekdaySymbols[weekday - 1]
-    }
-
-    private func getDateString(from date: Date) -> String {
-        dateFormatter.dateFormat = "d"
-        return dateFormatter.string(from: date)
-    }
-    
-    private func updateDaysInMonth(for date: Date) {
-        let range = calendar.range(of: .day, in: .month, for: date)!
-        daysInMonth = range.compactMap { day in
-            calendar.date(bySetting: .day, value: day, of: date)
-        }
-    }
-    
-    private func updateMonthIfNeeded(_ newMonth: Int) {
-        if let newMonthDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: Date()), month: newMonth)) {
-            updateDaysInMonth(for: newMonthDate)
-            if calendar.component(.month, from: selectedDate) != newMonth {
-                selectedDate = newMonthDate
-            }
-        }
-    }
-    
-    private func scrollToCurrentDate(proxy: ScrollViewProxy) {
-        let currentDate = calendar.startOfDay(for: Date())
-        if let dateToScroll = daysInMonth.first(where: { calendar.isDate($0, inSameDayAs: currentDate) }) {
-            withAnimation {
-                proxy.scrollTo(dateToScroll, anchor: .center)
-            }
+            viewModel.selectedDate = date
         }
     }
 }
