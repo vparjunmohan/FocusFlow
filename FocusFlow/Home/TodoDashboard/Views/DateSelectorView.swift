@@ -34,8 +34,12 @@ class DateSelectorViewModel: ObservableObject {
     func updateMonthIfNeeded(_ newMonth: Int) {
         if let newMonthDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: Date()), month: newMonth)) {
             updateDaysInMonth(for: newMonthDate)
-            if calendar.component(.month, from: selectedDate) != newMonth {
-                selectedDate = newMonthDate
+            if calendar.component(.month, from: Date()) == newMonth {
+                // If the selected month is the current month, set selectedDate to today
+                selectedDate = Date()
+            } else if calendar.component(.month, from: selectedDate) != newMonth {
+                // If it's not the current month, set selectedDate to the first day of the month
+                selectedDate = calendar.date(from: DateComponents(year: calendar.component(.year, from: newMonthDate), month: newMonth, day: 1)) ?? newMonthDate
             }
         }
     }
@@ -54,9 +58,8 @@ class DateSelectorViewModel: ObservableObject {
         return dateFormatter.string(from: date)
     }
     
-    func scrollToCurrentDate(proxy: ScrollViewProxy) {
-        let currentDate = calendar.startOfDay(for: Date())
-        if let dateToScroll = daysInMonth.first(where: { calendar.isDate($0, inSameDayAs: currentDate) }) {
+    func scrollToSelectedDate(proxy: ScrollViewProxy) {
+        if let dateToScroll = daysInMonth.first(where: { calendar.isDate($0, inSameDayAs: selectedDate) }) {
             withAnimation {
                 proxy.scrollTo(dateToScroll, anchor: .center)
             }
@@ -114,9 +117,9 @@ struct DateSelectorView: View {
                 }
                 .padding(.horizontal)
             }
-            .onAppear {
+            .onChange(of: viewModel.selectedDate) { _ in
                 DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                    viewModel.scrollToCurrentDate(proxy: proxy)
+                    viewModel.scrollToSelectedDate(proxy: proxy)
                 }
             }
         }
