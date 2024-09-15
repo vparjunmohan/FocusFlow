@@ -49,9 +49,11 @@ class ToDoViewModel: ObservableObject {
     ///   - priority: The priority level assigned to the to-do item.
     ///   - duedate: The due date for the to-do item, represented as a Unix timestamp in seconds (`Int`).
     /// - Throws: An error if the to-do item could not be created or saved to the database.
+    @MainActor
     func createItem(text: String, description: String, userUID: String, priority: String, duedate: Int) async throws {
         let todo = TodoPayload(task: text, taskDescription: description, userUID: userUID, priority: priority, duedate: duedate)
         try await DatabaseManager.shared.createTodoItem(item: todo)
+        resetData()
     }
     
     /// Asynchronously fetches the list of to-do items for a specific user and updates the `todoList`.
