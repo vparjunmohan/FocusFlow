@@ -7,10 +7,25 @@
 
 import SwiftUI
 
+/// A view that displays the detailed information for a specific to-do item.
+///
+/// The `DetailedTodoView` shows all relevant details of a given `Todos` object,
+/// allowing users to see additional information beyond the task's title or summary.
+///
+/// - Parameter todo: A `Todos` object representing the specific task to display details for.
 struct DetailedTodoView: View {
     
     var todo: Todos
     
+    /// The main body of the `DetailedTodoView`, which displays detailed information about a to-do item.
+    ///
+    /// The view is organized using a vertical scrollable layout (`ScrollView`), allowing users to scroll through
+    /// the task details if the content exceeds the screen height. It contains a `VStack` with a leading alignment
+    /// to structure the to-do title, options, and description, with customizable spacing between these elements.
+    ///
+    /// - `todoTitleField`: Displays the title of the to-do item.
+    /// - `optionView`: Displays additional options or metadata related to the to-do.
+    /// - `todoDescription`: Shows a detailed description of the to-do item.
     var body: some View {
         ScrollView(.vertical) {
             VStack(alignment: .leading, spacing: AppSpacers.xlarge) {
@@ -25,6 +40,15 @@ struct DetailedTodoView: View {
         .background(AppColors.surfacePrimary.ignoresSafeArea())
     }
     
+    /// A text field for displaying and editing the title of the to-do item.
+    ///
+    /// The `todoTitleField` uses a `TextField` to show the `task` property of the `todo` object.
+    /// It applies a bold font style for the title using a custom font helper, and sets the text color using
+    /// the app's color scheme.
+    ///
+    /// - The text is bound to the `todo.task` property, but editing is disabled with an empty `set` function.
+    /// - Font: Bold, title style.
+    /// - Foreground color: `AppColors.textPrimary`.
     private var todoTitleField: some View {
         TextField("", text: Binding(get: {
             todo.task
@@ -35,6 +59,12 @@ struct DetailedTodoView: View {
             .foregroundStyle(AppColors.textPrimary)
     }
     
+    /// A view that displays the labels for the created date, due date, and priority of the to-do item.
+    ///
+    /// The `dateView` contains three `Text` views for displaying static labels:
+    /// "Created Date", "Due Date", and "Priority".
+    ///
+    /// - The labels use a semi-bold, callout style font and a tertiary text color.
     private var dateView: some View {
         VStack(alignment: .leading, spacing: AppSpacers.medium) {
             Text("Created Date")
@@ -47,6 +77,13 @@ struct DetailedTodoView: View {
         .foregroundStyle(AppColors.textTertiary)
     }
     
+    /// A view that displays the actual values for the created date, due date, and priority of the to-do item.
+    ///
+    /// The `optionFillView` displays dynamic content: the created date, due date, and the priority.
+    /// - `Text`: Displays formatted dates (hardcoded for now) and the priority using the `priorityView`.
+    ///
+    /// - Font: Regular, subheadline style.
+    /// - Foreground color: `AppColors.textPrimary`.
     private var optionFillView: some View {
         VStack(alignment: .leading, spacing: AppSpacers.medium) {
             Text("15 September 2024")
@@ -59,6 +96,14 @@ struct DetailedTodoView: View {
         .foregroundStyle(AppColors.textPrimary)
     }
     
+    /// A view that displays the priority of the to-do item as a badge.
+    ///
+    /// The `priorityView` uses a `Text` to display the priority of the `todo` item in a shorthand format.
+    /// The text is styled with a bold, subheadline font, and the background color is determined by the
+    /// priority of the task. It is presented in a rounded rectangle to create a badge-like appearance.
+    ///
+    /// - Font: Bold, subheadline style.
+    /// - Background color: Dynamic, based on task priority.
     private var priorityView: some View {
         Text(Helpers.shared.getPriority(todo: todo))
             .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .bold))
@@ -71,6 +116,11 @@ struct DetailedTodoView: View {
             )
     }
     
+    /// A view that combines the `dateView` and `optionFillView` side by side.
+    ///
+    /// The `optionView` arranges the `dateView` and `optionFillView` horizontally with a medium-sized space
+    /// between them, showing the labels and their corresponding values for the to-do item's created date,
+    /// due date, and priority.
     private var optionView: some View {
         HStack(spacing: AppSpacers.medium) {
             dateView
@@ -78,6 +128,13 @@ struct DetailedTodoView: View {
         }
     }
     
+    /// A text field for displaying and editing the detailed description of the to-do item.
+    ///
+    /// The `todoDescription` contains a `TextField` bound to the `taskDescription` property of the `todo` object.
+    /// It also shows a "Description" label above the text field.
+    ///
+    /// - The text field uses a body style font for the description, while the label uses a callout style font.
+    /// - Foreground color: The label uses a tertiary text color, while the description text uses the primary text color.
     private var todoDescription: some View {
         VStack(alignment: .leading, spacing: AppSpacers.medium) {
             Text("Description")

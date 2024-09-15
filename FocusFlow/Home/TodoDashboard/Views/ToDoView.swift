@@ -54,14 +54,18 @@ struct ToDoView: View {
         }
     }
     
-    /// A view that displays the list of loaded todo items.
+    /// A view that displays the list of loaded to-do items.
     ///
-    /// Once the data is loaded, this view iterates through `viewModel.todoList`,
-    /// creating a `TaskView` for each todo item. It uses the `id` of each todo item
-    /// for efficient diffing and updating of the list.
+    /// This view iterates through the `viewModel.todoList` using `ForEach`, creating a `TaskView`
+    /// for each `todo` item. Each `TaskView` is wrapped in a `NavigationLink` that, when tapped,
+    /// navigates to a `DetailedTodoView` for the corresponding `todo` item.
     ///
-    /// The use of `ForEach` here allows SwiftUI to optimize the rendering and
-    /// updating of list items, particularly useful for long or frequently changing lists.
+    /// - The `id` property of each `todo` is used to ensure efficient diffing and updating
+    ///   when the list changes, improving performance.
+    /// - The `NavigationLink` allows seamless navigation between the list view and the
+    ///   detailed view of each to-do item.
+    /// - The use of `ForEach` here allows SwiftUI to optimize rendering and updating,
+    ///   especially for long or frequently updated lists.
     private var loadedContentView: some View {
         ForEach(viewModel.todoList, id: \.id) { todo in
             NavigationLink(destination: DetailedTodoView(todo: todo)) {
