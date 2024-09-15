@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DE1532DA2C96C718007EBDC9 /* DetailedTodoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1532D92C96C718007EBDC9 /* DetailedTodoView.swift */; };
+		DE1532DC2C97544F007EBDC9 /* Helpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE1532DB2C97544F007EBDC9 /* Helpers.swift */; };
 		DE7804B72C878542002EF556 /* ShimmerEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE7804B62C878542002EF556 /* ShimmerEffect.swift */; };
 		DE93D50F2C6A888600B7E7A2 /* FocusFlowApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE93D50E2C6A888600B7E7A2 /* FocusFlowApp.swift */; };
 		DE93D5112C6A888600B7E7A2 /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DE93D5102C6A888600B7E7A2 /* OnboardingView.swift */; };
@@ -76,6 +78,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		DE1532D92C96C718007EBDC9 /* DetailedTodoView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailedTodoView.swift; sourceTree = "<group>"; };
+		DE1532DB2C97544F007EBDC9 /* Helpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Helpers.swift; sourceTree = "<group>"; };
 		DE7804B62C878542002EF556 /* ShimmerEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerEffect.swift; sourceTree = "<group>"; };
 		DE93D50B2C6A888600B7E7A2 /* FocusFlow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FocusFlow.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DE93D50E2C6A888600B7E7A2 /* FocusFlowApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FocusFlowApp.swift; sourceTree = "<group>"; };
@@ -334,6 +338,7 @@
 				DEC03E452C707223004728BA /* DayBriefCardView.swift */,
 				DE97207C2C71FF1F00EC2F81 /* TaskView.swift */,
 				DE7804B62C878542002EF556 /* ShimmerEffect.swift */,
+				DE1532D92C96C718007EBDC9 /* DetailedTodoView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -356,6 +361,7 @@
 				DE97207A2C70CEEF00EC2F81 /* Extensions.swift */,
 				DEB9E7402C848E7A001C35C5 /* Utilities.swift */,
 				DEB9E74A2C84A01C001C35C5 /* LottieView.swift */,
+				DE1532DB2C97544F007EBDC9 /* Helpers.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -591,9 +597,11 @@
 				DE97207D2C71FF1F00EC2F81 /* TaskView.swift in Sources */,
 				DEC03E202C6F50BE004728BA /* DatabaseManager.swift in Sources */,
 				DEC03E282C6F5D6A004728BA /* ToDoViewModel.swift in Sources */,
+				DE1532DA2C96C718007EBDC9 /* DetailedTodoView.swift in Sources */,
 				DEC03E442C6FEDBC004728BA /* FontHelper.swift in Sources */,
 				DEC679582C7A559D00A12B70 /* CreateTodoViewModel.swift in Sources */,
 				DEC03DF52C6D2AFB004728BA /* SignInApple.swift in Sources */,
+				DE1532DC2C97544F007EBDC9 /* Helpers.swift in Sources */,
 				DEC03E172C6E88E6004728BA /* AppUserInfo.swift in Sources */,
 				DE93D50F2C6A888600B7E7A2 /* FocusFlowApp.swift in Sources */,
 				DEC03E262C6F5D30004728BA /* Todos.swift in Sources */,

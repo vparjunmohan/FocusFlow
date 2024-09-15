@@ -64,7 +64,9 @@ struct ToDoView: View {
     /// updating of list items, particularly useful for long or frequently changing lists.
     private var loadedContentView: some View {
         ForEach(viewModel.todoList, id: \.id) { todo in
-            TaskView(todos: todo)
+            NavigationLink(destination: DetailedTodoView(todo: todo)) {
+                TaskView(todos: todo)
+            }
         }
     }
     
