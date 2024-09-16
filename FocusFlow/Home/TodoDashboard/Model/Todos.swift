@@ -21,13 +21,13 @@ import Foundation
 /// The `CodingKeys` enum maps the JSON keys to the struct properties, ensuring that
 /// the keys in the JSON response align with the property names in the struct.
 struct Todos: Codable {
-    let id: Int
-    let createdAt: String
-    let task: String
-    let taskDescription: String
-    let priority: String
-    let userUID: String
-    let duedate: Int?
+    var id: Int
+    var createdAt: String
+    var task: String
+    var taskDescription: String
+    var priority: String
+    var userUID: String
+    var duedate: Int?
     
     init(id: Int, createdAt: String, task: String, taskDescription: String, priority: String, userUID: String, duedate: Int?) {
         self.id = id

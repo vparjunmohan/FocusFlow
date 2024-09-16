@@ -12,10 +12,12 @@ import SwiftUI
 /// The `DetailedTodoView` shows all relevant details of a given `Todos` object,
 /// allowing users to see additional information beyond the task's title or summary.
 ///
-/// - Parameter todo: A `Todos` object representing the specific task to display details for.
+/// - Parameter todo: A `Binding` to a `Todos` object representing the specific task
+///   whose details are to be displayed. This binding allows the view to both
+///   display and update the task's information interactively.
 struct DetailedTodoView: View {
     
-    var todo: Todos
+    @Binding var todo: Todos
     
     /// The main body of the `DetailedTodoView`, which displays detailed information about a to-do item.
     ///
@@ -27,12 +29,12 @@ struct DetailedTodoView: View {
     /// - `optionView`: Displays additional options or metadata related to the to-do.
     /// - `todoDescription`: Shows a detailed description of the to-do item.
     var body: some View {
-        ScrollView(.vertical) {
-            VStack(alignment: .leading, spacing: AppSpacers.xlarge) {
-                todoTitleField
-                optionView
-                todoDescription
-            }
+        VStack(alignment: .leading, spacing: AppSpacers.xlarge) {
+            todoTitleField
+            optionView
+            todoDescription
+            Spacer()
+            deleteButtonView
         }
         .padding(.horizontal, AppSpacers.large)
         .padding(.top, AppSpacers.large)
@@ -50,11 +52,7 @@ struct DetailedTodoView: View {
     /// - Font: Bold, title style.
     /// - Foreground color: `AppColors.textPrimary`.
     private var todoTitleField: some View {
-        TextField("", text: Binding(get: {
-            todo.task
-        }, set: { _ in
-            
-        }), axis: .vertical)
+        TextField("", text: $todo.task, axis: .vertical)
             .font(FontHelper.applyFont(forTextStyle: .title, weight: .bold))
             .foregroundStyle(AppColors.textPrimary)
     }
@@ -132,24 +130,45 @@ struct DetailedTodoView: View {
     
     /// A text field for displaying and editing the detailed description of the to-do item.
     ///
-    /// The `todoDescription` contains a `TextField` bound to the `taskDescription` property of the `todo` object.
-    /// It also shows a "Description" label above the text field.
+    /// The `todoDescription` view contains a `TextField` bound to the `taskDescription` property of the `todo` object.
+    /// It includes a "Description" label above the text field to provide context for the user.
     ///
-    /// - The text field uses a body style font for the description, while the label uses a callout style font.
-    /// - Foreground color: The label uses a tertiary text color, while the description text uses the primary text color.
+    /// - The text field is styled using the body font for the description content, while the label uses a callout style font.
+    /// - Foreground colors: The label uses a tertiary text color, while the description text uses the primary text color.
+    /// - Background: The text field has padding and is placed inside a rounded rectangle with a background color defined by `AppColors.cardColor`.
+    /// - Spacing: The content has a vertical spacing defined by `AppSpacers.medium`.
     private var todoDescription: some View {
         VStack(alignment: .leading, spacing: AppSpacers.medium) {
             Text("Description")
                 .font(FontHelper.applyFont(forTextStyle: .callout, weight: .semiBold))
                 .foregroundStyle(AppColors.textTertiary)
-            TextField("", text: Binding(get: {
-                todo.taskDescription
-            }, set: { _ in
-                
-            }), axis: .vertical)
+            TextField("", text: $todo.taskDescription, axis: .vertical)
                 .font(FontHelper.applyFont(forTextStyle: .body))
                 .foregroundStyle(AppColors.textPrimary)
+                .padding(AppSpacers.medium)
+                .background(AppColors.cardColor)
+                .clipShape(RoundedRectangle(cornerRadius: AppCornerCurves.xsmall))
         }
+    }
+    
+    /// A button view designed for deleting a to-do item.
+    ///
+    /// This button displays a "Delete" label with customized font and foreground color. It spans the full width of its container
+    /// and has a fixed height. The button's background color is set to a danger color to signify a delete action, and it is clipped
+    /// to a rounded rectangle shape for styling. The `.buttonStyle(PlainButtonStyle())` modifier is applied to ensure that the button
+    /// behaves consistently and the tap area includes the entire width and height of the button.
+    private var deleteButtonView: some View {
+        Button(action: {
+            print(todo)
+        }, label: {
+            Text("Delete")
+                .font(FontHelper.applyFont(forTextStyle: .body, weight: .semiBold))
+                .foregroundStyle(.white)
+                .frame(maxWidth: .infinity, maxHeight: 40)
+                .background(AppColors.dangerColor)
+                .clipShape(RoundedRectangle(cornerRadius: AppCornerCurves.small))
+        })
+        .buttonStyle(PlainButtonStyle())
     }
     
     /// Converts a date string from a specific format to a shorter `dd-MM` format.
@@ -176,5 +195,5 @@ struct DetailedTodoView: View {
 }
 
 #Preview {
-    DetailedTodoView(todo: .init(id: 1, createdAt: "15/09/2024, 11:07:56 PM", task: "Have dinner @10p.m", taskDescription: "some description", priority: "Priority 3", userUID: "qwyefuig", duedate: 123323))
+    DetailedTodoView(todo: .constant(.init(id: 1, createdAt: "15/09/2024, 11:07:56 PM", task: "Have dinner @10p.m", taskDescription: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent tincidunt, eros et pretium lacinia, lectus quam lobortis nibh, vel malesuada sapien massa id magna. Etiam at molestie lectus. Maecenas laoreet eros quis scelerisque dignissim. Suspendisse potenti. Phasellus tristique imperdiet purus vitae ultrices. Donec consectetur dolor augue, id tincidunt massa dignissim id. Pellentesque quis dui libero. Aliquam erat nulla, viverra sit amet aliquam lobortis, feugiat vitae ligula.", priority: "Priority 3", userUID: "qwyefuig", duedate: 123323)))
 }

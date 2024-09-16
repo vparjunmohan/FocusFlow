@@ -54,21 +54,22 @@ struct ToDoView: View {
         }
     }
     
-    /// A view that displays the list of loaded to-do items.
+    /// A view that displays a list of loaded to-do items.
     ///
-    /// This view iterates through the `viewModel.todoList` using `ForEach`, creating a `TaskView`
-    /// for each `todo` item. Each `TaskView` is wrapped in a `NavigationLink` that, when tapped,
-    /// navigates to a `DetailedTodoView` for the corresponding `todo` item.
+    /// This view uses `ForEach` to iterate through `viewModel.todoList`, creating a `TaskView`
+    /// for each `todo` item. Each `TaskView` is wrapped in a `NavigationLink` that navigates
+    /// to a `DetailedTodoView` when tapped, passing the corresponding `todo` item.
     ///
-    /// - The `id` property of each `todo` is used to ensure efficient diffing and updating
-    ///   when the list changes, improving performance.
-    /// - The `NavigationLink` allows seamless navigation between the list view and the
-    ///   detailed view of each to-do item.
-    /// - The use of `ForEach` here allows SwiftUI to optimize rendering and updating,
-    ///   especially for long or frequently updated lists.
+    /// - The `id` property of each `todo` is used for efficient diffing and updating of the list,
+    ///   enhancing performance during list changes.
+    /// - The `NavigationLink` provides seamless navigation to the detailed view of each to-do item.
+    /// - Using `ForEach` allows SwiftUI to optimize rendering and updating, which is particularly
+    ///   beneficial for long or frequently updated lists.
+    /// - The `ForEach` binding with `$viewModel.todoList` and `$todo` ensures that any changes
+    ///   to the `todo` items are reflected in the view, allowing for live updates and interaction.
     private var loadedContentView: some View {
-        ForEach(viewModel.todoList, id: \.id) { todo in
-            NavigationLink(destination: DetailedTodoView(todo: todo)) {
+        ForEach($viewModel.todoList, id: \.id) { $todo in
+            NavigationLink(destination: DetailedTodoView(todo: $todo)) {
                 TaskView(todos: todo)
             }
         }
