@@ -86,9 +86,11 @@ struct DetailedTodoView: View {
     /// - Foreground color: `AppColors.textPrimary`.
     private var optionFillView: some View {
         VStack(alignment: .leading, spacing: AppSpacers.medium) {
-            Text("15 September 2024")
+            Text(formatCreatedDate(dateString: todo.createdAt))
+                .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             
-            Text("20 September 2024")
+            Text(Helpers.shared.getDueDate(timestamp: todo.duedate ?? 0))
+                .font(FontHelper.applyFont(forTextStyle: .subheadline, weight: .medium))
             
             priorityView
         }
@@ -149,8 +151,30 @@ struct DetailedTodoView: View {
                 .foregroundStyle(AppColors.textPrimary)
         }
     }
+    
+    /// Converts a date string from a specific format to a shorter `dd-MM` format.
+    ///
+    /// This function takes a date string (in the format `dd/MM/yyyy, hh:mm:ss a`),
+    /// parses it into a `Date` object using an `inputFormatter`, and then re-formats
+    /// it into the desired `dd-MM` format using an `outputFormatter`.
+    ///
+    /// - Parameter dateString: A string representing the date and time in the format `dd/MM/yyyy, hh:mm:ss a`.
+    /// - Returns: A string representing the date in the `dd-MM` format. If the input string cannot be parsed, it returns an empty string.
+    private func formatCreatedDate(dateString: String) -> String {
+        let dateString = "15/09/2024, 11:07:56 PM"
+        let inputFormatter = DateFormatter()
+        inputFormatter.dateFormat = "dd/MM/yyyy, hh:mm:ss a"
+        
+        if let date = inputFormatter.date(from: dateString) {
+            let outputFormatter = DateFormatter()
+            outputFormatter.dateFormat = "dd-MM"
+            return outputFormatter.string(from: date)
+        } else {
+            return ""
+        }
+    }
 }
 
 #Preview {
-    DetailedTodoView(todo: .init(id: 1, createdAt: "20/8", task: "Go to gym", taskDescription: "some description", priority: "Priority 3", userUID: "qwyefuig", duedate: 123323))
+    DetailedTodoView(todo: .init(id: 1, createdAt: "15/09/2024, 11:07:56 PM", task: "Have dinner @10p.m", taskDescription: "some description", priority: "Priority 3", userUID: "qwyefuig", duedate: 123323))
 }
