@@ -18,6 +18,7 @@ import SwiftUI
 struct DetailedTodoView: View {
     
     @Binding var todo: Todos
+    @State var descriptionText: String = "Description"
     
     /// The main body of the `DetailedTodoView`, which displays detailed information about a to-do item.
     ///
@@ -142,7 +143,7 @@ struct DetailedTodoView: View {
             Text("Description")
                 .font(FontHelper.applyFont(forTextStyle: .callout, weight: .semiBold))
                 .foregroundStyle(AppColors.textTertiary)
-            TextField("", text: $todo.taskDescription, axis: .vertical)
+            TextField(todo.taskDescription.isEmpty ? descriptionText : "", text: $todo.taskDescription, axis: .vertical)
                 .font(FontHelper.applyFont(forTextStyle: .body))
                 .foregroundStyle(AppColors.textPrimary)
                 .padding(AppSpacers.medium)
